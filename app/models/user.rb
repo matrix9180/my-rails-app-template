@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                       :integer          not null, primary key
+#  email                    :string           not null
+#  otp_required_for_sign_in :boolean          default(FALSE), not null
+#  otp_secret               :string           not null
+#  password_digest          :string           not null
+#  provider                 :string
+#  uid                      :string
+#  username                 :string
+#  verified                 :boolean          default(FALSE), not null
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_email     (email) UNIQUE
+#  index_users_on_username  (username) UNIQUE
+#
 class User < ApplicationRecord
   has_secure_password
 
@@ -16,10 +37,12 @@ class User < ApplicationRecord
   has_many :events, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9]+\z/, message: "must be alphanumeric" }
   validates :password, allow_nil: true, length: { minimum: 12 }
   validates :password, not_pwned: { message: "might easily be guessed" }
 
   normalizes :email, with: -> { _1.strip.downcase }
+  normalizes :username, with: -> { _1.strip.downcase }
 
   before_validation if: :email_changed?, on: :update do
     self.verified = false

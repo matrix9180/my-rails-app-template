@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id         :integer          not null, primary key
+#  action     :string           not null
+#  ip_address :string
+#  user_agent :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :integer          not null
+#
+# Indexes
+#
+#  index_events_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  user_id  (user_id => users.id)
+#
 require "rails_helper"
 
 RSpec.describe Event, type: :model do
@@ -25,4 +45,5 @@ RSpec.describe Event, type: :model do
     end
   end
 end
+
 

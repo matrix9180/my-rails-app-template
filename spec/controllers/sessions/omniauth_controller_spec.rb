@@ -32,7 +32,7 @@ RSpec.describe Sessions::OmniauthController, type: :request do
     end
 
     it "should sign in existing user with OAuth" do
-      user = create(:user, provider: "github", uid: "12345", email: "oauth@example.com", verified: true)
+      user = create(:user, provider: "github", uid: "12345", email: "oauth@example.com", username: "oauth", verified: true)
 
       expect {
         post "/auth/github/callback", env: { "omniauth.auth" => auth_hash }

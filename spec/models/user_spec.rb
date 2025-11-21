@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                       :integer          not null, primary key
+#  email                    :string           not null
+#  otp_required_for_sign_in :boolean          default(FALSE), not null
+#  otp_secret               :string           not null
+#  password_digest          :string           not null
+#  provider                 :string
+#  uid                      :string
+#  username                 :string
+#  verified                 :boolean          default(FALSE), not null
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_email     (email) UNIQUE
+#  index_users_on_username  (username) UNIQUE
+#
 require "rails_helper"
 
 RSpec.describe User, type: :model do
@@ -17,11 +38,26 @@ RSpec.describe User, type: :model do
     it { should_not allow_value("invalid@").for(:email) }
     it { should validate_length_of(:password).is_at_least(12) }
 
+    it { should validate_presence_of(:username) }
+    it { should allow_value("username123").for(:username) }
+    it { should allow_value("User123").for(:username) }
+    it { should_not allow_value("user_name").for(:username) }
+    it { should_not allow_value("user-name").for(:username) }
+    it { should_not allow_value("user name").for(:username) }
+    it { should_not allow_value("user@name").for(:username) }
+
     it "validates email uniqueness case insensitively" do
       create(:user, email: "test@example.com")
       user = build(:user, email: "TEST@EXAMPLE.COM")
       expect(user).not_to be_valid
       expect(user.errors[:email]).to be_present
+    end
+
+    it "validates username uniqueness case insensitively" do
+      create(:user, username: "testuser")
+      user = build(:user, username: "TESTUSER")
+      expect(user).not_to be_valid
+      expect(user.errors[:username]).to be_present
     end
   end
 
@@ -34,6 +70,18 @@ RSpec.describe User, type: :model do
     it "strips whitespace from email" do
       user = create(:user, email: "  test@example.com  ")
       expect(user.email).to eq("test@example.com")
+    end
+  end
+
+  describe "username normalization" do
+    it "normalizes username to lowercase" do
+      user = create(:user, username: "TestUser123")
+      expect(user.username).to eq("testuser123")
+    end
+
+    it "strips whitespace from username" do
+      user = create(:user, username: "  testuser  ")
+      expect(user.username).to eq("testuser")
     end
   end
 

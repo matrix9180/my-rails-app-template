@@ -21,7 +21,25 @@ class Sessions::OmniauthController < ApplicationController
 
   private
     def user_params
-      { email: omniauth.info.email, password: SecureRandom.base58, verified: true }
+      {
+        email: omniauth.info.email,
+        username: generate_unique_username(omniauth.info.email),
+        password: SecureRandom.base58,
+        verified: true
+      }
+    end
+
+    def generate_unique_username(email)
+      base_username = email.split("@").first.gsub(/[^a-zA-Z0-9]/, "").downcase
+      base_username = "user" if base_username.empty?
+
+      username = base_username
+      counter = 1
+      while User.exists?(username: username)
+        username = "#{base_username}#{counter}"
+        counter += 1
+      end
+      username
     end
 
     def omniauth_params

@@ -28,3 +28,4 @@ RSpec.describe Authentications::EventsController, type: :request do
   end
 end
 
+

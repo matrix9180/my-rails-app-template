@@ -22,9 +22,19 @@
 
         <div class="form-control w-full">
           <label class="label">
+            <span class="label-text"><%= t("registrations.new.username") %></span>
+          </label>
+          <%= form.text_field :username, value: @user.username, required: true, autofocus: true, autocomplete: "username", class: "input input-bordered w-full" %>
+          <label class="label">
+            <span class="label-text-alt text-base-content/70"><%= t("registrations.new.username_hint") %></span>
+          </label>
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">
             <span class="label-text"><%= t("registrations.new.email_address") %></span>
           </label>
-          <%= form.email_field :email, value: @user.email, required: true, autofocus: true, autocomplete: "email", class: "input input-bordered w-full" %>
+          <%= form.email_field :email, value: @user.email, required: true, autocomplete: "email", class: "input input-bordered w-full" %>
         </div>
 
         <div class="form-control w-full">
