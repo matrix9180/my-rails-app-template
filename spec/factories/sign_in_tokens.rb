@@ -1,7 +1,6 @@
 FactoryBot.define do
-  factory :session do
+  factory :sign_in_token do
     association :user
-    sudo_at { Time.current }
   end
 end
 

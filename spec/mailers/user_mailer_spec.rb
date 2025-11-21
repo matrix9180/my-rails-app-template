@@ -18,5 +18,13 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.to).to eq([user.email])
     end
   end
+
+  describe "#passwordless" do
+    it "sends passwordless sign in email" do
+      mail = UserMailer.with(user: user).passwordless
+      expect(mail.subject).to eq("Your sign in link")
+      expect(mail.to).to eq([user.email])
+    end
+  end
 end
 
