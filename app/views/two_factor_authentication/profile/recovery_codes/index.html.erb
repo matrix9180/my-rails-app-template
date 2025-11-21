@@ -1,16 +1,32 @@
-<p style="color: green"><%= notice %></p>
+<div class="max-w-2xl mx-auto">
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h1 class="card-title text-3xl mb-4">Two-factor recovery codes</h1>
+      <div role="alert" class="alert alert-warning mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        <span>Recovery codes provide a way to log in if you lose your phone (or don't have it with you). Save these and keep them somewhere safe.</span>
+      </div>
 
-<h1>Two-factor recovery codes</h1>
-<p>Recovery codes provide a way to log in if you lose your phone (or don't have it with you). Save these and keep them somewhere safe.</p>
+      <div class="card bg-base-200 p-6 mb-6">
+        <ul class="space-y-2 font-mono text-center">
+          <%= render @recovery_codes %>
+        </ul>
+      </div>
 
-<ul><%= render @recovery_codes %></ul>
+      <div class="card-actions justify-end">
+        <%= link_to "OK, I'm done", root_path, class: "btn btn-primary" %>
+      </div>
 
-<div><%= link_to "OK, I'm done", root_path %></div>
+      <div class="divider"></div>
 
-<hr>
+      <div>
+        <h2 class="text-2xl font-semibold mb-2">Need new recovery codes?</h2>
+        <p class="mb-4">If you think your codes have fallen into the wrong hands, you can get a new set. Be sure to save the new ones because the old codes will stop working.</p>
 
-<h2>Need new recovery codes?</h2>
-
-<p>If you think your codes have fallen into the wrong hands, you can get a new set. Be sure to save the new ones because the old codes will stop working.</p>
-
-<%= button_to "Generate new recovery codes", two_factor_authentication_profile_recovery_codes_path %>
+        <%= button_to "Generate new recovery codes", two_factor_authentication_profile_recovery_codes_path, class: "btn btn-outline" %>
+      </div>
+    </div>
+  </div>
+</div>

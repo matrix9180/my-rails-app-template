@@ -1,35 +1,62 @@
-<h1>Sign up</h1>
+<div class="max-w-md mx-auto mt-8">
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h1 class="card-title text-3xl mb-6 justify-center">Sign up</h1>
 
-<%= form_with(url: sign_up_path) do |form| %>
-  <% if @user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% @user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+      <%= form_with(url: sign_up_path, class: "space-y-6") do |form| %>
+        <% if @user.errors.any? %>
+          <div role="alert" class="alert alert-error">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <h3 class="font-bold"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
+              <ul class="list-disc list-inside text-sm">
+                <% @user.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
         <% end %>
-      </ul>
+
+        <div class="form-control w-full">
+          <label class="label">
+            <span class="label-text">Email address</span>
+          </label>
+          <%= form.email_field :email, value: @user.email, required: true, autofocus: true, autocomplete: "email", class: "input input-bordered w-full" %>
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">
+            <span class="label-text">Password</span>
+          </label>
+          <%= form.password_field :password, required: true, autocomplete: "new-password", class: "input input-bordered w-full" %>
+          <label class="label">
+            <span class="label-text-alt text-base-content/70">12 characters minimum</span>
+          </label>
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">
+            <span class="label-text">Confirm password</span>
+          </label>
+          <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", class: "input input-bordered w-full" %>
+        </div>
+
+        <div class="form-control mt-8">
+          <%= form.submit "Sign up", class: "btn btn-primary btn-lg w-full" %>
+        </div>
+      <% end %>
+
+      <div class="divider">OR</div>
+
+      <div class="text-center">
+        <p class="text-sm text-base-content/70">
+          Already have an account?
+          <%= link_to "Sign in", sign_in_path, class: "link link-primary font-semibold" %>
+        </p>
+      </div>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.email_field :email, value: @user.email, required: true, autofocus: true, autocomplete: "email" %>
   </div>
-
-  <div>
-    <%= form.label :password, style: "display: block" %>
-    <%= form.password_field :password, required: true, autocomplete: "new-password" %>
-    <div>12 characters minimum.</div>
-  </div>
-
-  <div>
-    <%= form.label :password_confirmation, style: "display: block" %>
-    <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password" %>
-  </div>
-
-  <div>
-    <%= form.submit "Sign up" %>
-  </div>
-<% end %>
+</div>

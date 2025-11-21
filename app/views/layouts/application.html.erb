@@ -23,9 +23,75 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="min-h-screen flex flex-col">
+    <header class="navbar bg-base-100 shadow-lg">
+      <div class="container mx-auto px-5 flex justify-between items-center w-full">
+        <div class="flex-1">
+          <%= link_to root_path, class: "btn btn-ghost text-xl" do %>
+            My Rails App Template
+          <% end %>
+        </div>
+        <div class="flex-none ml-auto">
+          <% if Current.user %>
+            <div class="dropdown dropdown-end">
+              <div tabindex="0" role="button" class="btn btn-ghost">
+                <%= Current.user.email %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+              </div>
+              <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                <li><%= link_to "Home", root_path %></li>
+                <li><%= link_to "Change password", edit_password_path %></li>
+                <li><%= link_to "Change email", edit_identity_email_path %></li>
+                <li><%= link_to "Two-Factor Authentication", new_two_factor_authentication_profile_totp_path %></li>
+                <% if Current.user.otp_required_for_sign_in? %>
+                  <li><%= link_to "Recovery Codes", two_factor_authentication_profile_recovery_codes_path %></li>
+                <% end %>
+                <li><%= link_to "Devices & Sessions", sessions_path %></li>
+                <li><%= link_to "Activity Log", authentications_events_path %></li>
+                <li><hr class="my-2"></li>
+                <li>
+                  <%= link_to "Log out", Current.session, data: { turbo_method: :delete }, class: "text-error" %>
+                </li>
+              </ul>
+            </div>
+          <% else %>
+            <div class="flex gap-2">
+              <%= link_to "Sign in", sign_in_path, class: "btn btn-ghost" %>
+              <%= link_to "Sign up", sign_up_path, class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-5 py-8 flex-1">
+      <% if notice %>
+        <div role="alert" class="alert alert-success mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span><%= notice %></span>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div role="alert" class="alert alert-error mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span><%= alert %></span>
+        </div>
+      <% end %>
+
       <%= yield %>
     </main>
+
+    <footer class="footer footer-center bg-base-200 text-base-content p-4 mt-auto">
+      <div>
+        <p>&copy; <%= Date.current.year %> My Rails App Template. All rights reserved.</p>
+      </div>
+    </footer>
   </body>
 </html>
