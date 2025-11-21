@@ -11,7 +11,7 @@ class TwoFactorAuthentication::Profile::TotpsController < ApplicationController
       @user.update! otp_required_for_sign_in: true
       redirect_to two_factor_authentication_profile_recovery_codes_path
     else
-      redirect_to new_two_factor_authentication_profile_totp_path, alert: "That code didn't work. Please try again"
+      redirect_to new_two_factor_authentication_profile_totp_path, alert: t("two_factor_authentication.profile.totps.create.code_didnt_work")
     end
   end
 

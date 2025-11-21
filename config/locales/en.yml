@@ -1,31 +1,224 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  application:
+    name: "My Rails App Template"
+    copyright: "All rights reserved."
+
+  layout:
+    header:
+      home: "Home"
+      change_password: "Change password"
+      change_email: "Change email"
+      two_factor_authentication: "Two-Factor Authentication"
+      recovery_codes: "Recovery Codes"
+      devices_sessions: "Devices & Sessions"
+      activity_log: "Activity Log"
+      log_out: "Log out"
+      sign_in: "Sign in"
+      sign_up: "Sign up"
+    footer:
+      copyright_text: "&copy; %{year} %{name}. %{rights}"
+
+  home:
+    index:
+      welcome_back: "Welcome back!"
+      signed_in_as: "Signed in as"
+      account_settings: "Account Settings"
+      access_history: "Access History"
+      change_password: "Change password"
+      change_email_address: "Change email address"
+      two_factor_authentication: "Two-Factor Authentication"
+      recovery_codes: "Recovery Codes"
+      devices_sessions: "Devices & Sessions"
+      activity_log: "Activity Log"
+
+  registrations:
+    new:
+      title: "Sign up"
+      email_address: "Email address"
+      password: "Password"
+      confirm_password: "Confirm password"
+      password_minimum: "12 characters minimum"
+      submit: "Sign up"
+      or: "OR"
+      already_have_account: "Already have an account?"
+      sign_in: "Sign in"
+    create:
+      welcome: "Welcome! You have signed up successfully"
+    errors:
+      prohibited: "error prohibited this user from being saved:"
+      errors: "errors prohibited this user from being saved:"
+
+  sessions:
+    new:
+      title: "Sign in"
+      email_address: "Email address"
+      password: "Password"
+      forgot_password: "Forgot your password?"
+      submit: "Sign in"
+      or: "OR"
+      sign_in_without_password: "Sign in without password"
+      sign_in_with_omniauth: "Sign in with OmniAuth"
+      dont_have_account: "Don't have an account?"
+      sign_up: "Sign up"
+    create:
+      signed_in_successfully: "Signed in successfully"
+      incorrect_email_password: "That email or password is incorrect"
+    destroy:
+      session_logged_out: "That session has been logged out"
+    index:
+      title: "Devices & Sessions"
+      user_agent: "User Agent"
+      ip_address: "IP Address"
+      created_at: "Created at"
+      log_out: "Log out"
+      back: "Back"
+
+  passwords:
+    edit:
+      title: "Change your password"
+      current_password: "Current password"
+      new_password: "New password"
+      confirm_new_password: "Confirm new password"
+      password_minimum: "12 characters minimum"
+      save_changes: "Save changes"
+      back: "Back"
+    update:
+      password_changed: "Your password has been changed"
+
+  password_resets:
+    new:
+      title: "Forgot your password?"
+      description: "Enter your email address and we'll send you a link to reset your password."
+      email_address: "Email address"
+      send_password_reset_email: "Send password reset email"
+      back_to_sign_in: "Back to sign in"
+    edit:
+      title: "Reset your password"
+      new_password: "New password"
+      confirm_new_password: "Confirm new password"
+      password_minimum: "12 characters minimum"
+      save_changes: "Save changes"
+    create:
+      check_email: "Check your email for reset instructions"
+      must_verify_email: "You can't reset your password until you verify your email"
+    update:
+      password_reset_successfully: "Your password was reset successfully. Please sign in"
+      invalid_link: "That password reset link is invalid"
+
+  emails:
+    edit:
+      change_email: "Change your email"
+      verify_email: "Verify your email"
+      verification_sent: "We sent a verification email to the address below. Check that email and follow those instructions to confirm it's your email address."
+      resend_verification_email: "Re-send verification email"
+      new_email: "New email address"
+      current_password: "Current password"
+      save_changes: "Save changes"
+      back: "Back"
+    update:
+      email_changed: "Your email has been changed"
+
+  email_verifications:
+    show:
+      thank_you: "Thank you for verifying your email address"
+    create:
+      verification_sent: "We sent a verification email to your email address"
+      invalid_link: "That email verification link is invalid"
+
+  sudos:
+    new:
+      title: "Enter your password to continue"
+      password: "Password"
+      continue: "Continue"
+      why_asking: "Why are you asking me to do this?"
+      why_asking_description: "To better protect your account, we'll occasionally ask you to confirm your password before performing sensitive actions."
+      forgot_password: "Forgot your password?"
+      reset_it: "We'll help you reset it so you can continue."
+    create:
+      incorrect_password: "The password you entered is incorrect"
+
+  passwordlesses:
+    new:
+      title: "Sign in without password"
+      description: "Enter your email address and we'll send you a magic link to sign in."
+      email_address: "Email address"
+      sign_in: "Sign in"
+      back_to_sign_in: "Back to sign in"
+    create:
+      check_email: "Check your email for sign in instructions"
+      must_verify_email: "You can't sign in until you verify your email"
+      invalid_link: "That sign in link is invalid"
+    edit:
+      signed_in_successfully: "Signed in successfully"
+
+  two_factor_authentication:
+    challenge:
+      totps:
+        new:
+          title: "Two-Factor Authentication"
+          description: "Open the 2FA authenticator app on your phone and type the six digit code below:"
+          verification_code: "Verification Code"
+          verify: "Verify"
+          dont_have_phone: "Don't have your phone?"
+          use_recovery_code: "Use a recovery code to access your account."
+        create:
+          code_didnt_work: "That code didn't work. Please try again"
+          taking_too_long: "That's taking too long. Please re-enter your password and try again"
+      recovery_codes:
+        new:
+          title: "Recovery Code"
+          description: "Enter one of your recovery codes below to access your account."
+          recovery_code: "Recovery Code"
+          continue: "Continue"
+          info: "To access your account, enter one of the recovery codes (e.g., xxxxxxxxxx) you saved when you set up your two-factor authentication device."
+        create:
+          code_didnt_work: "That code didn't work. Please try again"
+          taking_too_long: "That's taking too long. Please re-enter your password and try again"
+    profile:
+      totps:
+        new:
+          replace_setup: "Want to replace your existing 2FA setup?"
+          replace_setup_description: "Your account is already protected with two-factor authentication. You can replace that setup if you want to switch to a new phone or authenticator app."
+          replace_setup_warning: "Do you want to continue? Your existing 2FA setup will no longer work."
+          yes_replace: "Yes, replace my 2FA setup"
+          upgrade_security: "Upgrade your security with 2FA"
+          step_1_title: "Step 1: Get an Authenticator App"
+          step_1_description_1: "First, you'll need a 2FA authenticator app on your phone."
+          step_1_skip: "If you already have one, skip to step 2."
+          step_1_recommendation: "If you don't have one, or you aren't sure, we recommend Microsoft Authenticator"
+          step_1_download: "You can download it free on the Apple App Store for iPhone, or Google Play Store for Android. Please grab your phone, search the store, and install it now."
+          step_2_title: "Step 2: Scan + Enter the Code"
+          step_2_description: "Next, open the authenticator app, tap \"Scan QR code\" or \"+\", and, when it asks, point your phone's camera at this QR code picture below."
+          point_camera: "Point your camera here"
+          code_label: "After scanning with your camera, the app will generate a six-digit code. Enter it here:"
+          verify_and_activate: "Verify and activate"
+          back: "Back"
+        create:
+          code_didnt_work: "That code didn't work. Please try again"
+      recovery_codes:
+        index:
+          title: "Two-factor recovery codes"
+          description: "Recovery codes provide a way to log in if you lose your phone (or don't have it with you). Save these and keep them somewhere safe."
+          ok_done: "OK, I'm done"
+          need_new_codes: "Need new recovery codes?"
+          need_new_codes_description: "If you think your codes have fallen into the wrong hands, you can get a new set. Be sure to save the new ones because the old codes will stop working."
+          generate_new: "Generate new recovery codes"
+        create:
+          new_codes_generated: "Your new recovery codes have been generated"
+
+  events:
+    index:
+      title: "Activity Log"
+      action: "Action"
+      user_agent: "User Agent"
+      ip_address: "IP Address"
+      created_at: "Created at"
+      back: "Back"
+
+  common:
+    back: "Back"
+    or: "OR"
+    errors:
+      prohibited: "error prohibited this user from being saved:"
+      errors: "errors prohibited this user from being saved:"
+    try_again_later: "Try again later"

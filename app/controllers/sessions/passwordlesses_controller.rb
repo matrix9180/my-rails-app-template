@@ -1,7 +1,7 @@
 class Sessions::PasswordlessesController < ApplicationController
   skip_before_action :authenticate
 
-  rate_limit to: 10, within: 1.hour, only: :create, with: -> { redirect_to root_path, alert: "Try again later" }
+  rate_limit to: 10, within: 1.hour, only: :create, with: -> { redirect_to root_path, alert: t("common.try_again_later") }
   before_action :set_user, only: :edit
 
   def new
@@ -11,15 +11,15 @@ class Sessions::PasswordlessesController < ApplicationController
     session_record = @user.sessions.create!
     cookies.signed.permanent[:session_token] = { value: session_record.id, httponly: true }
 
-    revoke_tokens; redirect_to(root_path, notice: "Signed in successfully")
+    revoke_tokens; redirect_to(root_path, notice: t("passwordlesses.edit.signed_in_successfully"))
   end
 
   def create
     if @user = User.find_by(email: params[:email], verified: true)
       send_passwordless_email
-      redirect_to sign_in_path, notice: "Check your email for sign in instructions"
+      redirect_to sign_in_path, notice: t("passwordlesses.create.check_email")
     else
-      redirect_to new_sessions_passwordless_path, alert: "You can't sign in until you verify your email"
+      redirect_to new_sessions_passwordless_path, alert: t("passwordlesses.create.must_verify_email")
     end
   end
 
@@ -27,7 +27,7 @@ class Sessions::PasswordlessesController < ApplicationController
     def set_user
       token = SignInToken.find_signed!(params[:sid]); @user = token.user
     rescue StandardError
-      redirect_to new_sessions_passwordless_path, alert: "That sign in link is invalid"
+      redirect_to new_sessions_passwordless_path, alert: t("passwordlesses.create.invalid_link")
     end
 
     def send_passwordless_email

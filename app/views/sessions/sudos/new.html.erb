@@ -1,20 +1,20 @@
 <div class="max-w-md mx-auto mt-8">
   <div class="card bg-base-100 shadow-xl">
     <div class="card-body">
-      <h1 class="card-title text-3xl mb-6 justify-center">Enter your password to continue</h1>
+      <h1 class="card-title text-3xl mb-6 justify-center"><%= t("sudos.new.title") %></h1>
 
       <%= form_with(url: sessions_sudo_path, class: "space-y-6") do |form| %>
         <%= form.hidden_field :proceed_to_url, value: params[:proceed_to_url] %>
 
         <div class="form-control w-full">
           <label class="label">
-            <span class="label-text">Password</span>
+            <span class="label-text"><%= t("sudos.new.password") %></span>
           </label>
           <%= form.password_field :password, required: true, autofocus: true, autocomplete: "current-password", class: "input input-bordered w-full" %>
         </div>
 
         <div class="form-control mt-8">
-          <%= form.submit "Continue", class: "btn btn-primary btn-lg w-full" %>
+          <%= form.submit t("sudos.new.continue"), class: "btn btn-primary btn-lg w-full" %>
         </div>
       <% end %>
 
@@ -26,15 +26,15 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
           <div>
-            <h3 class="font-bold">Why are you asking me to do this?</h3>
-            <div class="text-xs">To better protect your account, we'll occasionally ask you to confirm your password before performing sensitive actions.</div>
+            <h3 class="font-bold"><%= t("sudos.new.why_asking") %></h3>
+            <div class="text-xs"><%= t("sudos.new.why_asking_description") %></div>
           </div>
         </div>
 
         <div class="text-center">
           <p class="text-sm text-base-content/70">
-            <strong>Forgot your password?</strong><br>
-            We'll help you <%= link_to "reset it", new_identity_password_reset_path, class: "link link-primary" %> so you can continue.
+            <strong><%= t("sudos.new.forgot_password") %></strong><br>
+            <%= t("sudos.new.reset_it") %>
           </p>
         </div>
       </div>

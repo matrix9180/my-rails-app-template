@@ -13,7 +13,7 @@ class TwoFactorAuthentication::Profile::RecoveryCodesController < ApplicationCon
     @user.recovery_codes.delete_all
     @user.recovery_codes.create!(new_recovery_codes)
 
-    redirect_to two_factor_authentication_profile_recovery_codes_path, notice: "Your new recovery codes have been generated"
+    redirect_to two_factor_authentication_profile_recovery_codes_path, notice: t("two_factor_authentication.profile.recovery_codes.create.new_codes_generated")
   end
 
   private

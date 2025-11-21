@@ -1,7 +1,7 @@
 <div class="max-w-4xl mx-auto">
   <div class="card bg-base-100 shadow-xl">
     <div class="card-body">
-      <h1 class="card-title text-3xl mb-6">Activity Log</h1>
+      <h1 class="card-title text-3xl mb-6"><%= t("events.index.title") %></h1>
 
       <div id="sessions" class="space-y-4">
         <% @events.each do |event| %>
@@ -9,24 +9,24 @@
             <div class="card-body">
               <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
-                  <p class="text-sm font-semibold text-base-content/70">Action</p>
+                  <p class="text-sm font-semibold text-base-content/70"><%= t("events.index.action") %></p>
                   <p class="text-sm">
                     <span class="badge badge-primary"><%= event.action %></span>
                   </p>
                 </div>
 
                 <div>
-                  <p class="text-sm font-semibold text-base-content/70">User Agent</p>
+                  <p class="text-sm font-semibold text-base-content/70"><%= t("events.index.user_agent") %></p>
                   <p class="text-sm break-words"><%= event.user_agent %></p>
                 </div>
 
                 <div>
-                  <p class="text-sm font-semibold text-base-content/70">IP Address</p>
+                  <p class="text-sm font-semibold text-base-content/70"><%= t("events.index.ip_address") %></p>
                   <p class="text-sm"><%= event.ip_address %></p>
                 </div>
 
                 <div>
-                  <p class="text-sm font-semibold text-base-content/70">Created at</p>
+                  <p class="text-sm font-semibold text-base-content/70"><%= t("events.index.created_at") %></p>
                   <p class="text-sm"><%= event.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
                 </div>
               </div>
@@ -36,7 +36,7 @@
       </div>
 
       <div class="card-actions justify-end mt-6">
-        <%= link_to "Back", root_path, class: "btn btn-ghost" %>
+        <%= link_to t("events.index.back"), root_path, class: "btn btn-ghost" %>
       </div>
     </div>
   </div>

@@ -8,7 +8,7 @@ class Sessions::SudosController < ApplicationController
     if session_record.user.authenticate(params[:password])
       session_record.touch(:sudo_at); redirect_to(params[:proceed_to_url])
     else
-      redirect_to new_sessions_sudo_path(proceed_to_url: params[:proceed_to_url]), alert: "The password you entered is incorrect"
+      redirect_to new_sessions_sudo_path(proceed_to_url: params[:proceed_to_url]), alert: t("sudos.create.incorrect_password")
     end
   end
 end

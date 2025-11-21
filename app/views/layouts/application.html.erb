@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "My Rails App Template" %></title>
+    <title><%= content_for(:title) || t("application.name") %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="My Rails App Template">
+    <meta name="application-name" content="<%= t("application.name") %>">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -28,7 +28,7 @@
       <div class="container mx-auto px-5 flex justify-between items-center w-full">
         <div class="flex-1">
           <%= link_to root_path, class: "btn btn-ghost text-xl" do %>
-            My Rails App Template
+            <%= t("application.name") %>
           <% end %>
         </div>
         <div class="flex-none ml-auto">
@@ -41,25 +41,25 @@
                 </svg>
               </div>
               <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                <li><%= link_to "Home", root_path %></li>
-                <li><%= link_to "Change password", edit_password_path %></li>
-                <li><%= link_to "Change email", edit_identity_email_path %></li>
-                <li><%= link_to "Two-Factor Authentication", new_two_factor_authentication_profile_totp_path %></li>
+                <li><%= link_to t("layout.header.home"), root_path %></li>
+                <li><%= link_to t("layout.header.change_password"), edit_password_path %></li>
+                <li><%= link_to t("layout.header.change_email"), edit_identity_email_path %></li>
+                <li><%= link_to t("layout.header.two_factor_authentication"), new_two_factor_authentication_profile_totp_path %></li>
                 <% if Current.user.otp_required_for_sign_in? %>
-                  <li><%= link_to "Recovery Codes", two_factor_authentication_profile_recovery_codes_path %></li>
+                  <li><%= link_to t("layout.header.recovery_codes"), two_factor_authentication_profile_recovery_codes_path %></li>
                 <% end %>
-                <li><%= link_to "Devices & Sessions", sessions_path %></li>
-                <li><%= link_to "Activity Log", authentications_events_path %></li>
+                <li><%= link_to t("layout.header.devices_sessions"), sessions_path %></li>
+                <li><%= link_to t("layout.header.activity_log"), authentications_events_path %></li>
                 <li><hr class="my-2"></li>
                 <li>
-                  <%= link_to "Log out", Current.session, data: { turbo_method: :delete }, class: "text-error" %>
+                  <%= link_to t("layout.header.log_out"), Current.session, data: { turbo_method: :delete }, class: "text-error" %>
                 </li>
               </ul>
             </div>
           <% else %>
             <div class="flex gap-2">
-              <%= link_to "Sign in", sign_in_path, class: "btn btn-ghost" %>
-              <%= link_to "Sign up", sign_up_path, class: "btn btn-primary" %>
+              <%= link_to t("layout.header.sign_in"), sign_in_path, class: "btn btn-ghost" %>
+              <%= link_to t("layout.header.sign_up"), sign_up_path, class: "btn btn-primary" %>
             </div>
           <% end %>
         </div>
@@ -90,7 +90,7 @@
 
     <footer class="footer footer-center bg-base-200 text-base-content p-4 mt-auto">
       <div>
-        <p>&copy; <%= Date.current.year %> My Rails App Template. All rights reserved.</p>
+        <p><%= t("layout.footer.copyright_text", year: Date.current.year, name: t("application.name"), rights: t("application.copyright")).html_safe %></p>
       </div>
     </footer>
   </body>
