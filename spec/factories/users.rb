@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
-    email { "lazaronixon@hotmail.com" }
-    password { "Secret1*3*5*" }
+    sequence(:email) { |n| "user#{n}@example.com" }
+    password { SecureRandom.alphanumeric(20) + "!@#" }
     verified { true }
   end
 end

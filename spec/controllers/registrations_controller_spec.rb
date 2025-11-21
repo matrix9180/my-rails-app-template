@@ -10,8 +10,11 @@ RSpec.describe RegistrationsController, type: :request do
 
   describe "POST /sign_up" do
     it "should sign up" do
+      password = SecureRandom.alphanumeric(20) + "!@#"
+      email = "newuser@example.com"
+
       expect {
-        post sign_up_url, params: { email: "lazaronixon@hey.com", password: "Secret1*3*5*", password_confirmation: "Secret1*3*5*" }
+        post sign_up_url, params: { email: email, password: password, password_confirmation: password }
       }.to change(User, :count).by(1)
 
       expect(response).to redirect_to(root_url)

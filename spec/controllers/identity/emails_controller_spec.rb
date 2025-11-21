@@ -16,12 +16,14 @@ RSpec.describe Identity::EmailsController, type: :request do
 
   describe "PATCH /identity/email" do
     it "should update email" do
-      patch identity_email_url, params: { email: "new_email@hey.com", password_challenge: "Secret1*3*5*" }
+      new_email = "new_email@example.com"
+      patch identity_email_url, params: { email: new_email, password_challenge: user.password }
       expect(response).to redirect_to(root_url)
     end
 
     it "should not update email with wrong password challenge" do
-      patch identity_email_url, params: { email: "new_email@hey.com", password_challenge: "SecretWrong1*3" }
+      new_email = "new_email@example.com"
+      patch identity_email_url, params: { email: new_email, password_challenge: "WrongPassword123!@#" }
 
       expect(response).to have_http_status(:unprocessable_content)
       expect(response.body).to match(/Password challenge is invalid/)

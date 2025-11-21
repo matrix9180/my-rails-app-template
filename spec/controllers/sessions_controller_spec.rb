@@ -21,7 +21,7 @@ RSpec.describe SessionsController, type: :request do
 
   describe "POST /sign_in" do
     it "should sign in" do
-      post sign_in_url, params: { email: user.email, password: "Secret1*3*5*" }
+      post sign_in_url, params: { email: user.email, password: user.password }
       expect(response).to redirect_to(root_url)
 
       get root_url
@@ -29,7 +29,7 @@ RSpec.describe SessionsController, type: :request do
     end
 
     it "should not sign in with wrong credentials" do
-      post sign_in_url, params: { email: user.email, password: "SecretWrong1*3" }
+      post sign_in_url, params: { email: user.email, password: "WrongPassword123!@#" }
       expect(response).to redirect_to(sign_in_url(email_hint: user.email))
       expect(flash[:alert]).to eq("That email or password is incorrect")
 
