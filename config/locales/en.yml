@@ -1,7 +1,7 @@
 en:
   application:
     name: "My Rails App Template"
-    copyright: "All rights reserved."
+    copyright: "Chad Ingram"
 
   layout:
     header:
@@ -18,7 +18,7 @@ en:
       sign_in: "Sign in"
       sign_up: "Sign up"
     footer:
-      copyright_text: "&copy; %{year} %{name}. %{rights}"
+      copyright_text: "&copy; %{year} %{rights}"
 
   home:
     index:

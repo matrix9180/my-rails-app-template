@@ -2,6 +2,8 @@
 
 A comprehensive Rails 8.1 starter template with authentication, user profiles, and all the essential features configured the way I want them. This is my go-to template for starting new Rails projects.
 
+**GitHub:** [matrix9180/my-rails-app-template](https://github.com/matrix9180/my-rails-app-template)
+
 ## Features
 
 ### Authentication & Security
@@ -76,7 +78,7 @@ A comprehensive Rails 8.1 starter template with authentication, user profiles, a
 
 1. Clone this repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/matrix9180/my-rails-app-template.git
    cd my-rails-app-template
    ```
 
@@ -217,7 +219,9 @@ This app is configured for deployment with Kamal. See `config/deploy.yml` for de
 
 ## License
 
-This is a personal starter template. Use it as you wish.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+Copyright (c) 2025 Chad Ingram
 
 ## Notes
 
