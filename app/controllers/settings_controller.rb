@@ -5,4 +5,3 @@ class SettingsController < ApplicationController
     redirect_to settings_profile_path
   end
 end
-

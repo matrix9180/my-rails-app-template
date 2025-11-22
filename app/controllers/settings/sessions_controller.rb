@@ -16,4 +16,3 @@ class Settings::SessionsController < ApplicationController
       @session = Current.user.sessions.find(params[:id])
     end
 end
-

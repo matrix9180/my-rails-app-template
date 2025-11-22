@@ -4,4 +4,3 @@ class Settings::EventsController < ApplicationController
     @events = Current.user.events.order(created_at: :desc)
   end
 end
-

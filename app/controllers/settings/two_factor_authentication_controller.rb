@@ -34,4 +34,3 @@ class Settings::TwoFactorAuthenticationController < ApplicationController
       @totp.provisioning_uri @user.email
     end
 end
-

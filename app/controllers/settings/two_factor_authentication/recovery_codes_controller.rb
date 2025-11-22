@@ -30,4 +30,3 @@ class Settings::TwoFactorAuthentication::RecoveryCodesController < ApplicationCo
       SecureRandom.alphanumeric(10).downcase
     end
 end
-

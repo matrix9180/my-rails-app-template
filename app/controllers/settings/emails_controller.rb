@@ -38,4 +38,3 @@ class Settings::EmailsController < ApplicationController
       UserMailer.with(user: @user).email_verification.deliver_later
     end
 end
-
