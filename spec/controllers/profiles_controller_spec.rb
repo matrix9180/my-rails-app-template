@@ -45,12 +45,12 @@ RSpec.describe ProfilesController, type: :request do
         test_image_path = Rails.root.join("tmp", "test_image.jpg")
         FileUtils.mkdir_p(File.dirname(test_image_path))
         File.write(test_image_path, "fake image content")
-        
+
         avatar = Rack::Test::UploadedFile.new(test_image_path, "image/jpeg")
         patch update_my_profile_url, params: { user: { avatar: avatar } }
         expect(response).to redirect_to(my_profile_path)
         expect(user.reload.avatar).to be_attached
-        
+
         FileUtils.rm_f(test_image_path)
       end
 
@@ -62,4 +62,3 @@ RSpec.describe ProfilesController, type: :request do
     end
   end
 end
-
