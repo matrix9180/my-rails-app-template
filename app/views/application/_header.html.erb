@@ -38,15 +38,7 @@
             </li>
             <li><hr class="my-2"></li>
             <li><%= link_to t("layout.header.home"), root_path %></li>
-            <li><%= link_to t("layout.header.edit_profile"), edit_my_profile_path %></li>
-            <li><%= link_to t("layout.header.change_password"), edit_password_path %></li>
-            <li><%= link_to t("layout.header.change_email"), edit_identity_email_path %></li>
-            <li><%= link_to t("layout.header.two_factor_authentication"), new_two_factor_authentication_profile_totp_path %></li>
-            <% if Current.user.otp_required_for_sign_in? %>
-              <li><%= link_to t("layout.header.recovery_codes"), two_factor_authentication_profile_recovery_codes_path %></li>
-            <% end %>
-            <li><%= link_to t("layout.header.devices_sessions"), sessions_path %></li>
-            <li><%= link_to t("layout.header.activity_log"), authentications_events_path %></li>
+            <li><%= link_to t("layout.header.settings"), settings_path %></li>
             <li><hr class="my-2"></li>
             <li>
               <%= button_to t("layout.header.log_out"), session_path(Current.session), method: :delete, class: "text-error w-full text-left", data: { turbo: false } %>

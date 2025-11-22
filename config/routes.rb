@@ -37,6 +37,20 @@ Rails.application.routes.draw do
     resource :passwordless, only: [ :new, :edit, :create ]
     resource :sudo, only: [ :new, :create ]
   end
+
+  # Settings pages
+  get "settings", to: "settings#index", as: :settings
+  namespace :settings do
+    resource :profile, only: [ :show, :update ]
+    resource :password, only: [ :show, :update ]
+    resource :email, only: [ :show, :update ]
+    resource :two_factor_authentication, only: [ :show, :create, :update ], controller: "two_factor_authentication" do
+      resources :recovery_codes, only: [ :index, :create ], controller: "two_factor_authentication/recovery_codes"
+    end
+    resources :sessions, only: [ :index, :destroy ]
+    resources :events, only: [ :index ]
+  end
+
   root "home#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

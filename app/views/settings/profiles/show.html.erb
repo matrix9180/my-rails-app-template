@@ -1,0 +1,55 @@
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body">
+    <h1 class="card-title text-3xl mb-6"><%= t("profiles.edit.title") %></h1>
+
+    <%= form_with(model: @user, url: settings_profile_path, method: :patch, multipart: true, class: "space-y-6") do |form| %>
+      <% if @user.errors.any? %>
+        <div role="alert" class="alert alert-error">
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <div>
+            <h3 class="font-bold"><%= pluralize(@user.errors.count, t("common.errors.prohibited"), t("common.errors.errors")) %></h3>
+            <ul class="list-disc list-inside text-sm">
+              <% @user.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text"><%= t("profiles.edit.avatar") %></span>
+        </label>
+        <% if @user.avatar.attached? %>
+          <div class="mb-4">
+            <%= image_tag @user.avatar, class: "w-32 h-32 rounded-full object-cover" %>
+          </div>
+        <% end %>
+        <%= form.file_field :avatar, accept: "image/*", class: "file-input file-input-bordered w-full" %>
+        <label class="label">
+          <span class="label-text-alt text-base-content/70"><%= t("profiles.edit.avatar_hint") %></span>
+        </label>
+      </div>
+
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text"><%= t("profiles.edit.bio") %></span>
+        </label>
+        <%= form.rich_text_area :bio %>
+        <% if @user.bio.present? %>
+          <div class="prose max-w-none mt-4 p-4 bg-base-200 rounded-lg">
+            <%= @user.bio %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="form-control mt-8">
+        <%= form.submit t("profiles.edit.save_changes"), class: "btn btn-primary btn-lg" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

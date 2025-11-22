@@ -1,0 +1,70 @@
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body">
+    <% if Current.user.otp_required_for_sign_in? %>
+      <div role="alert" class="alert alert-success mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span><%= t("settings.two_factor_authentication.enabled") %></span>
+      </div>
+
+      <div class="mb-6">
+        <h2 class="text-xl font-semibold mb-4"><%= t("settings.two_factor_authentication.recovery_codes") %></h2>
+        <p class="mb-4 text-sm text-base-content/70"><%= t("two_factor_authentication.profile.recovery_codes.index.description") %></p>
+        <%= link_to settings_two_factor_authentication_recovery_codes_path, class: "btn btn-outline" do %>
+          <%= t("settings.two_factor_authentication.view_recovery_codes") %>
+        <% end %>
+      </div>
+
+      <div class="divider"></div>
+
+      <div>
+        <h2 class="text-xl font-semibold mb-4"><%= t("two_factor_authentication.profile.totps.new.replace_setup") %></h2>
+        <p class="mb-4 text-sm text-base-content/70"><%= t("two_factor_authentication.profile.totps.new.replace_setup_description") %></p>
+        <div role="alert" class="alert alert-warning mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          <span class="text-sm"><%= t("two_factor_authentication.profile.totps.new.replace_setup_warning") %></span>
+        </div>
+        <%= button_to t("two_factor_authentication.profile.totps.new.yes_replace"), settings_two_factor_authentication_path, method: :patch, class: "btn btn-warning" %>
+      </div>
+    <% else %>
+      <h1 class="card-title text-3xl mb-6"><%= t("two_factor_authentication.profile.totps.new.upgrade_security") %></h1>
+
+      <div class="space-y-6">
+        <div>
+          <h2 class="text-2xl font-semibold mb-2"><%= t("two_factor_authentication.profile.totps.new.step_1_title") %></h2>
+          <p class="mb-2"><%= t("two_factor_authentication.profile.totps.new.step_1_description_1") %> <strong><%= t("two_factor_authentication.profile.totps.new.step_1_skip") %></strong></p>
+          <p><strong><%= t("two_factor_authentication.profile.totps.new.step_1_recommendation") %></strong> <%= t("two_factor_authentication.profile.totps.new.step_1_download") %></p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-semibold mb-2"><%= t("two_factor_authentication.profile.totps.new.step_2_title") %></h2>
+          <p class="mb-4"><%= t("two_factor_authentication.profile.totps.new.step_2_description") %></p>
+
+          <figure class="flex flex-col items-center">
+            <div class="card bg-base-200 p-4">
+              <%= image_tag @qr_code.as_png(resize_exactly_to: 200).to_data_url, alt: "QR Code", class: "mx-auto" %>
+            </div>
+            <figcaption class="text-sm text-base-content/70 mt-2"><%= t("two_factor_authentication.profile.totps.new.point_camera") %></figcaption>
+          </figure>
+        </div>
+
+        <%= form_with(url: settings_two_factor_authentication_path, class: "space-y-6") do |form| %>
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text"><%= t("two_factor_authentication.profile.totps.new.code_label") %></span>
+            </label>
+            <%= form.text_field :code, required: true, autofocus: true, autocomplete: :off, class: "input input-bordered w-full text-center text-2xl tracking-widest font-mono", maxlength: 6, pattern: "[0-9]{6}", placeholder: "000000" %>
+          </div>
+
+          <div class="form-control mt-8">
+            <%= form.submit t("two_factor_authentication.profile.totps.new.verify_and_activate"), class: "btn btn-primary btn-lg" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

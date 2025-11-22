@@ -6,6 +6,7 @@ en:
   layout:
     header:
       home: "Home"
+      settings: "Settings"
       edit_profile: "Edit Profile"
       change_password: "Change password"
       change_email: "Change email"
@@ -231,6 +232,20 @@ en:
       ip_address: "IP Address"
       created_at: "Created at"
       back: "Back"
+
+  settings:
+    title: "Settings"
+    nav:
+      profile: "Profile"
+      password: "Password"
+      email: "Email"
+      two_factor_authentication: "Two-Factor Authentication"
+      sessions: "Sessions"
+      activity_log: "Activity Log"
+    two_factor_authentication:
+      enabled: "Two-factor authentication is enabled"
+      recovery_codes: "Recovery Codes"
+      view_recovery_codes: "View Recovery Codes"
 
   common:
     back: "Back"

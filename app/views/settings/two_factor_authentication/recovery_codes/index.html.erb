@@ -1,0 +1,37 @@
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body">
+    <h1 class="card-title text-3xl mb-4"><%= t("two_factor_authentication.profile.recovery_codes.index.title") %></h1>
+    <div role="alert" class="alert alert-warning mb-6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+      <span><%= t("two_factor_authentication.profile.recovery_codes.index.description") %></span>
+    </div>
+
+    <div class="card bg-base-200 p-6 mb-6">
+      <ul class="space-y-2 font-mono text-center">
+        <% @recovery_codes.each do |recovery_code| %>
+          <% if recovery_code.used? %>
+            <li class="text-base-content/50 line-through"><%= recovery_code.code %></li>
+          <% else %>
+            <li class="text-lg font-semibold"><%= recovery_code.code %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="card-actions justify-end mb-6">
+      <%= link_to t("common.back"), settings_two_factor_authentication_path, class: "btn btn-primary" %>
+    </div>
+
+    <div class="divider"></div>
+
+    <div>
+      <h2 class="text-2xl font-semibold mb-2"><%= t("two_factor_authentication.profile.recovery_codes.index.need_new_codes") %></h2>
+      <p class="mb-4"><%= t("two_factor_authentication.profile.recovery_codes.index.need_new_codes_description") %></p>
+
+      <%= button_to t("two_factor_authentication.profile.recovery_codes.index.generate_new"), settings_two_factor_authentication_recovery_codes_path, class: "btn btn-outline" %>
+    </div>
+  </div>
+</div>
+

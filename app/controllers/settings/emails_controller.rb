@@ -1,0 +1,38 @@
+class Settings::EmailsController < ApplicationController
+  layout "settings"
+  before_action :set_user
+
+  def show
+  end
+
+  def update
+    if @user.update(user_params)
+      redirect_to_settings
+    else
+      render :show, status: :unprocessable_content
+    end
+  end
+
+  private
+    def set_user
+      @user = Current.user
+    end
+
+    def user_params
+      params.permit(:email, :password_challenge).with_defaults(password_challenge: "")
+    end
+
+    def redirect_to_settings
+      if @user.email_previously_changed?
+        resend_email_verification
+        redirect_to settings_email_path, notice: t("emails.update.email_changed")
+      else
+        redirect_to settings_email_path
+      end
+    end
+
+    def resend_email_verification
+      UserMailer.with(user: @user).email_verification.deliver_later
+    end
+end
+

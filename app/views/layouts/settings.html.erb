@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || t("application.name") %> - <%= t("settings.title") %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="<%= t("application.name") %>">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "lexxy" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="min-h-screen flex flex-col">
+    <%= render "header" %>
+
+    <div class="fixed top-16 left-0 right-0 z-40 pointer-events-none pt-2">
+      <div class="container mx-auto px-5">
+        <div class="pointer-events-auto space-y-2">
+          <%= render "flash" %>
+        </div>
+      </div>
+    </div>
+
+    <main class="container mx-auto px-5 py-8 flex-1 pt-40">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col lg:flex-row gap-8">
+          <!-- Sidebar -->
+          <aside class="lg:w-64 flex-shrink-0">
+            <div class="sticky top-24">
+              <h2 class="text-xl font-semibold mb-4"><%= t("settings.title") %></h2>
+              <nav class="space-y-1">
+                <%= link_to settings_profile_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors #{'bg-base-200 font-semibold' if request.path == settings_profile_path || request.path == settings_path}" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                  </svg>
+                  <%= t("settings.nav.profile") %>
+                <% end %>
+
+                <%= link_to settings_password_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors #{'bg-base-200 font-semibold' if request.path == settings_password_path}" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v-2.25H6v-2.25H4.5V12h2.25l1.757-1.757c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+                  </svg>
+                  <%= t("settings.nav.password") %>
+                <% end %>
+
+                <%= link_to settings_email_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors #{'bg-base-200 font-semibold' if request.path == settings_email_path}" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                  </svg>
+                  <%= t("settings.nav.email") %>
+                <% end %>
+
+                <%= link_to settings_two_factor_authentication_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors #{'bg-base-200 font-semibold' if request.path.start_with?('/settings/two_factor_authentication')}" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                  </svg>
+                  <%= t("settings.nav.two_factor_authentication") %>
+                <% end %>
+
+                <%= link_to settings_sessions_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors #{'bg-base-200 font-semibold' if request.path == settings_sessions_path}" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+                  </svg>
+                  <%= t("settings.nav.sessions") %>
+                <% end %>
+
+                <%= link_to settings_events_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors #{'bg-base-200 font-semibold' if request.path == settings_events_path}" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <%= t("settings.nav.activity_log") %>
+                <% end %>
+              </nav>
+            </div>
+          </aside>
+
+          <!-- Main Content -->
+          <div class="flex-1 min-w-0">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <%= render "footer" %>
+  </body>
+</html>
+
