@@ -24,4 +24,12 @@ class ApplicationController < ActionController::Base
         redirect_to new_sessions_sudo_path(proceed_to_url: request.original_url)
       end
     end
+
+    def require_admin
+      if Current.user.blank?
+        redirect_to sign_in_path, alert: t("application.require_admin.must_be_signed_in"
+      else
+        redirect_to root_path, alert: t("application.require_admin.not_authorized") unless Current.user.admin?
+      end
+    end
 end

@@ -2,6 +2,9 @@ en:
   application:
     name: "My Rails App Template"
     copyright: "Chad Ingram"
+    require_admin:
+      must_be_signed_in: "You must be signed in to access this page"
+      not_authorized: "You are not authorized to access this page"
 
   layout:
     header:
