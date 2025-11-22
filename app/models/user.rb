@@ -36,6 +36,9 @@ class User < ApplicationRecord
   has_many :sign_in_tokens, dependent: :destroy
   has_many :events, dependent: :destroy
 
+  has_one_attached :avatar
+  has_rich_text :bio
+
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9]+\z/, message: "must be alphanumeric" }
   validates :password, allow_nil: true, length: { minimum: 12 }
@@ -66,5 +69,9 @@ class User < ApplicationRecord
 
   after_update if: [ :verified_previously_changed?, :verified? ] do
     events.create! action: "email_verified"
+  end
+
+  def to_param
+    username
   end
 end

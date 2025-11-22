@@ -80,3 +80,6 @@ gem "omniauth-rails_csrf_protection"
 gem "rotp"
 # Use rqrcode for creating and rendering QR codes into various formats [https://github.com/whomwah/rqrcode]
 gem "rqrcode"
+
+
+gem 'lexxy', '~> 0.1.20.beta'

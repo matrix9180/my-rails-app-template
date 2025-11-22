@@ -1,0 +1,32 @@
+<div class="max-w-2xl mx-auto mt-8">
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <div class="flex flex-col items-center mb-6">
+        <% if @user.avatar.attached? %>
+          <%= image_tag @user.avatar, class: "w-32 h-32 rounded-full object-cover mb-4" %>
+        <% else %>
+          <div class="w-32 h-32 rounded-full bg-base-300 flex items-center justify-center text-4xl font-semibold mb-4">
+            <%= @user.username.first.upcase %>
+          </div>
+        <% end %>
+        <h1 class="card-title text-3xl mb-2">@<%= @user.username %></h1>
+        <% if Current.user == @user %>
+          <div class="mt-4">
+            <%= link_to t("profiles.show.edit_profile"), edit_my_profile_path, class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+
+      <% if @user.bio.present? %>
+        <div class="lexxy-content max-w-none mt-6 p-6 bg-base-200 rounded-lg">
+          <%= @user.bio %>
+        </div>
+      <% else %>
+        <div class="text-center text-base-content/70 py-8">
+          <p><%= t("profiles.show.no_bio") %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

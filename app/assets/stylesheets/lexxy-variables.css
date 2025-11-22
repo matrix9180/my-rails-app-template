@@ -1,0 +1,54 @@
+:root {
+  /* Colors - mapped to DaisyUI theme variables */
+  --lexxy-color-ink: var(--color-base-content);
+  --lexxy-color-ink-medium: color-mix(in oklch, var(--color-base-content) 60%, transparent);
+  --lexxy-color-ink-light: color-mix(in oklch, var(--color-base-content) 40%, transparent);
+  --lexxy-color-ink-lighter: color-mix(in oklch, var(--color-base-content) 15%, transparent);
+  --lexxy-color-ink-lightest: color-mix(in oklch, var(--color-base-content) 4%, transparent);
+  --lexxy-color-ink-inverted: var(--color-base-100);
+
+  --lexxy-color-accent-dark: var(--color-primary);
+  --lexxy-color-accent-medium: color-mix(in oklch, var(--color-primary) 80%, var(--color-base-100));
+  --lexxy-color-accent-light: color-mix(in oklch, var(--color-primary) 20%, var(--color-base-100));
+  --lexxy-color-accent-lightest: color-mix(in oklch, var(--color-primary) 8%, var(--color-base-100));
+
+  --lexxy-color-red: var(--color-error);
+  --lexxy-color-green: var(--color-success);
+  --lexxy-color-blue: var(--color-info);
+  --lexxy-color-purple: var(--color-secondary);
+
+  /* Code tokens - use theme-aware colors with fallbacks */
+  --lexxy-color-code-token-att: var(--color-error);
+  --lexxy-color-code-token-comment: var(--lexxy-color-ink-medium);
+  --lexxy-color-code-token-function: var(--color-secondary);
+  --lexxy-color-code-token-operator: var(--color-error);
+  --lexxy-color-code-token-property: var(--color-info);
+  --lexxy-color-code-token-punctuation: var(--lexxy-color-ink);
+  --lexxy-color-code-token-selector: var(--color-success);
+  --lexxy-color-code-token-variable: var(--color-warning);
+
+  --lexxy-color-canvas: var(--color-base-100);
+  --lexxy-color-text: var(--color-base-content);
+  --lexxy-color-text-subtle: var(--lexxy-color-ink-medium);
+  --lexxy-color-link: var(--color-primary);
+  --lexxy-color-selected: var(--lexxy-color-accent-lightest);
+  --lexxy-color-selected-hover: var(--lexxy-color-accent-light);
+  --lexxy-color-selected-dark: var(--color-info);
+  --lexxy-color-code-bg: var(--color-base-200);
+
+  /* Typography */
+  --lexxy-font-base: system-ui, sans-serif;
+  --lexxy-font-mono: ui-monospace, "Menlo", "Monaco", Consolas, monospace;
+  --lexxy-text-small: 0.875rem;
+  --lexxy-content-margin: 1rem;
+
+  /* Focus ring */
+  --lexxy-focus-ring-color: var(--color-primary);
+  --lexxy-focus-ring-offset: 2px;
+  --lexxy-focus-ring-size: 2px;
+
+  /* Misc */
+  --lexxy-radius: var(--radius-field, 0.5ch);
+  --lexxy-shadow: 0 2px 8px color-mix(in oklch, var(--color-base-content) 10%, transparent);
+  --lexxy-z-popup: 1000;
+}

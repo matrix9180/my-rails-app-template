@@ -6,6 +6,7 @@ en:
   layout:
     header:
       home: "Home"
+      edit_profile: "Edit Profile"
       change_password: "Change password"
       change_email: "Change email"
       two_factor_authentication: "Two-Factor Authentication"
@@ -86,6 +87,20 @@ en:
       back: "Back"
     update:
       password_changed: "Your password has been changed"
+
+  profiles:
+    show:
+      edit_profile: "Edit Profile"
+      no_bio: "This user hasn't added a bio yet."
+    edit:
+      title: "Edit Profile"
+      avatar: "Avatar"
+      avatar_hint: "Upload a profile picture"
+      bio: "Bio"
+      save_changes: "Save changes"
+      back: "Back"
+    update:
+      profile_updated: "Your profile has been updated"
 
   password_resets:
     new:
