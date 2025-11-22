@@ -8,6 +8,7 @@
 #  otp_secret               :string           not null
 #  password_digest          :string           not null
 #  provider                 :string
+#  role                     :integer          default(0), not null
 #  theme                    :integer          default("light"), not null
 #  uid                      :string
 #  username                 :string
@@ -22,6 +23,12 @@
 #
 class User < ApplicationRecord
   has_secure_password
+
+  enum :role, {
+    user: 0,
+    admin: 1_000
+    # App-specific roles here
+  }
 
   enum :theme, {
     light: 0,

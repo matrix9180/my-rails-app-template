@@ -8,6 +8,7 @@
 #  otp_secret               :string           not null
 #  password_digest          :string           not null
 #  provider                 :string
+#  role                     :integer          default(0), not null
 #  theme                    :integer          default("light"), not null
 #  uid                      :string
 #  username                 :string
@@ -28,6 +29,10 @@ RSpec.describe User, type: :model do
     it { should have_many(:recovery_codes).dependent(:destroy) }
     it { should have_many(:sign_in_tokens).dependent(:destroy) }
     it { should have_many(:events).dependent(:destroy) }
+  end
+
+  describe "role enum" do
+    it { should define_enum_for(:role).with_values(user: 0, admin: 1_000) }
   end
 
   describe "validations" do
