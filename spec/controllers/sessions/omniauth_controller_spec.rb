@@ -58,4 +58,3 @@ RSpec.describe Sessions::OmniauthController, type: :request do
     end
   end
 end
-

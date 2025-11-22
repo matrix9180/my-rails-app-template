@@ -17,7 +17,7 @@ RSpec.describe Identity::EmailVerificationsController, type: :request do
 
       expect(response).to redirect_to(root_url)
       expect(ActionMailer::Base.deliveries.last.subject).to eq("Verify your email")
-      expect(ActionMailer::Base.deliveries.last.to).to eq([user.email])
+      expect(ActionMailer::Base.deliveries.last.to).to eq([ user.email ])
     end
   end
 
@@ -41,4 +41,3 @@ RSpec.describe Identity::EmailVerificationsController, type: :request do
     end
   end
 end
-

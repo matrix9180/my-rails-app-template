@@ -14,5 +14,3 @@ RSpec.describe HomeController, type: :request do
     end
   end
 end
-
-

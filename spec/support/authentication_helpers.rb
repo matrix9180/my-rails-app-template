@@ -9,4 +9,3 @@ RSpec.configure do |config|
   config.include AuthenticationHelpers, type: :request
   config.include ActiveSupport::Testing::TimeHelpers
 end
-

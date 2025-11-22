@@ -49,4 +49,3 @@ RSpec.describe TwoFactorAuthentication::Challenge::RecoveryCodesController, type
     end
   end
 end
-

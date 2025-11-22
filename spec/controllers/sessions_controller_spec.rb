@@ -57,4 +57,3 @@ RSpec.describe SessionsController, type: :request do
     end
   end
 end
-

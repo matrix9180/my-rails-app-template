@@ -44,5 +44,3 @@ RSpec.describe TwoFactorAuthentication::Profile::RecoveryCodesController, type: 
     end
   end
 end
-
-

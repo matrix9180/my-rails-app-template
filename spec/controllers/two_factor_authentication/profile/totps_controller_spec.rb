@@ -44,5 +44,3 @@ RSpec.describe TwoFactorAuthentication::Profile::TotpsController, type: :request
     end
   end
 end
-
-

@@ -24,4 +24,3 @@ FactoryBot.define do
     sudo_at { Time.current }
   end
 end
-

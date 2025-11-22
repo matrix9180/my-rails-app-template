@@ -29,7 +29,7 @@ RSpec.describe Identity::PasswordResetsController, type: :request do
 
       expect(response).to redirect_to(sign_in_url)
       expect(ActionMailer::Base.deliveries.last.subject).to eq("Reset your password")
-      expect(ActionMailer::Base.deliveries.last.to).to eq([user.email])
+      expect(ActionMailer::Base.deliveries.last.to).to eq([ user.email ])
     end
 
     it "should not send a password reset email to a nonexistent email" do
@@ -77,4 +77,3 @@ RSpec.describe Identity::PasswordResetsController, type: :request do
     end
   end
 end
-

@@ -24,4 +24,3 @@ FactoryBot.define do
     used { false }
   end
 end
-

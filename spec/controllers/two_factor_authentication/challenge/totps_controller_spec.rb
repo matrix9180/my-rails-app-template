@@ -43,4 +43,3 @@ RSpec.describe TwoFactorAuthentication::Challenge::TotpsController, type: :reque
     end
   end
 end
-

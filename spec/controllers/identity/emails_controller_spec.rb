@@ -30,4 +30,3 @@ RSpec.describe Identity::EmailsController, type: :request do
     end
   end
 end
-

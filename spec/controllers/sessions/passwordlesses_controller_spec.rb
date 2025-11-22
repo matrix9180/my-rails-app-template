@@ -60,7 +60,7 @@ RSpec.describe Sessions::PasswordlessesController, type: :request do
       expect(response).to redirect_to(sign_in_url)
       expect(flash[:notice]).to eq("Check your email for sign in instructions")
       expect(ActionMailer::Base.deliveries.last.subject).to eq("Your sign in link")
-      expect(ActionMailer::Base.deliveries.last.to).to eq([user.email])
+      expect(ActionMailer::Base.deliveries.last.to).to eq([ user.email ])
     end
 
     it "should not send email to unverified user" do
@@ -88,5 +88,3 @@ RSpec.describe Sessions::PasswordlessesController, type: :request do
     end
   end
 end
-
-
