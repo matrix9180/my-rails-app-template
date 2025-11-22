@@ -1,11 +1,14 @@
 class Settings::EmailsController < ApplicationController
   layout "settings"
   before_action :set_user
+  before_action :require_sudo, only: [ :show, :update ]
 
   def show
   end
 
   def update
+    # Since we're in sudo mode, the user has already authenticated
+    # We can update email without password_challenge
     if @user.update(user_params)
       redirect_to_settings
     else
@@ -19,7 +22,7 @@ class Settings::EmailsController < ApplicationController
     end
 
     def user_params
-      params.permit(:email, :password_challenge).with_defaults(password_challenge: "")
+      params.permit(:email)
     end
 
     def redirect_to_settings

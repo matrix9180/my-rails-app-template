@@ -21,16 +21,9 @@
 
       <div class="form-control w-full">
         <label class="label">
-          <span class="label-text"><%= t("passwords.edit.current_password") %></span>
-        </label>
-        <%= form.password_field :password_challenge, required: true, autofocus: true, autocomplete: "current-password", class: "input input-bordered w-full" %>
-      </div>
-
-      <div class="form-control w-full">
-        <label class="label">
           <span class="label-text"><%= t("passwords.edit.new_password") %></span>
         </label>
-        <%= form.password_field :password, required: true, autocomplete: "new-password", class: "input input-bordered w-full" %>
+        <%= form.password_field :password, required: true, autofocus: true, autocomplete: "new-password", class: "input input-bordered w-full" %>
         <label class="label">
           <span class="label-text-alt text-base-content/70"><%= t("passwords.edit.password_minimum") %></span>
         </label>

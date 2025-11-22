@@ -1,7 +1,7 @@
 class Settings::ProfilesController < ApplicationController
   layout "settings"
   before_action :set_user
-  before_action :require_sudo, only: [ :update ]
+  before_action :require_sudo, only: [ :show, :update ]
 
   def show
   end

@@ -129,6 +129,7 @@ en:
       verify_email: "Verify your email"
       verification_sent: "We sent a verification email to the address below. Check that email and follow those instructions to confirm it's your email address."
       resend_verification_email: "Re-send verification email"
+      email_address: "Email address"
       new_email: "New email address"
       current_password: "Current password"
       save_changes: "Save changes"

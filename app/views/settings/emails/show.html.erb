@@ -34,16 +34,9 @@
 
       <div class="form-control w-full">
         <label class="label">
-          <span class="label-text"><%= t("emails.edit.new_email") %></span>
+          <span class="label-text"><%= t("emails.edit.email_address") %></span>
         </label>
-        <%= form.email_field :email, required: true, autofocus: true, class: "input input-bordered w-full" %>
-      </div>
-
-      <div class="form-control w-full">
-        <label class="label">
-          <span class="label-text"><%= t("emails.edit.current_password") %></span>
-        </label>
-        <%= form.password_field :password_challenge, required: true, autocomplete: "current-password", class: "input input-bordered w-full" %>
+        <%= form.email_field :email, value: @user.email, required: true, autofocus: true, class: "input input-bordered w-full" %>
       </div>
 
       <div class="form-control mt-8">
