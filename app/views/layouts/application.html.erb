@@ -27,9 +27,15 @@
   <body class="min-h-screen flex flex-col">
     <%= render "header" %>
 
-    <main class="container mx-auto px-5 py-8 flex-1">
-      <%= render "flash" %>
+    <div class="fixed top-16 left-0 right-0 z-40 pointer-events-none pt-2">
+      <div class="container mx-auto px-5">
+        <div class="pointer-events-auto space-y-2">
+          <%= render "flash" %>
+        </div>
+      </div>
+    </div>
 
+    <main class="container mx-auto px-5 py-8 flex-1 pt-40">
       <%= yield %>
     </main>
 

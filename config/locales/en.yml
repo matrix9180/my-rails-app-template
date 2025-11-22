@@ -67,7 +67,7 @@ en:
       signed_in_successfully: "Signed in successfully"
       incorrect_email_password: "That email or password is incorrect"
     destroy:
-      session_logged_out: "That session has been logged out"
+      session_logged_out: "You have been logged out of that session"
     index:
       title: "Devices & Sessions"
       user_agent: "User Agent"

@@ -1,9 +1,14 @@
 <% flash.each do |type, message| %>
-  <div role="alert" class="alert <%= flash_alert_class(type) %> mb-4">
+  <div role="alert" class="alert <%= flash_alert_class(type) %> shadow-lg" data-controller="flash">
     <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="<%= flash_icon_path(type) %>" />
     </svg>
     <span><%= message %></span>
+    <button type="button" class="btn btn-sm btn-ghost" data-action="click->flash#close">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
   </div>
 <% end %>
 
