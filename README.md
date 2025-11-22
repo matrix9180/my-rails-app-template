@@ -221,7 +221,7 @@ This is a personal starter template. Use it as you wish.
 
 ## Notes
 
-- All authentication is handled via `authentication-zero` gem
+- Authentication code was generated using `authentication-zero` and has been customized for this template
 - The app uses modern Rails conventions (Rails 8.1)
 - Stimulus controllers replace inline JavaScript
 - Flash messages are dismissible and positioned to not shift layout
