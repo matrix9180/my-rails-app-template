@@ -8,6 +8,7 @@
 #  otp_secret               :string           not null
 #  password_digest          :string           not null
 #  provider                 :string
+#  theme                    :integer          default("light"), not null
 #  uid                      :string
 #  username                 :string
 #  verified                 :boolean          default(FALSE), not null
@@ -21,6 +22,44 @@
 #
 class User < ApplicationRecord
   has_secure_password
+
+  enum :theme, {
+    light: 0,
+    dark: 1,
+    cupcake: 2,
+    bumblebee: 3,
+    emerald: 4,
+    corporate: 5,
+    synthwave: 6,
+    retro: 7,
+    cyberpunk: 8,
+    valentine: 9,
+    halloween: 10,
+    garden: 11,
+    forest: 12,
+    aqua: 13,
+    lofi: 14,
+    pastel: 15,
+    fantasy: 16,
+    wireframe: 17,
+    black: 18,
+    luxury: 19,
+    dracula: 20,
+    cmyk: 21,
+    autumn: 22,
+    business: 23,
+    acid: 24,
+    lemonade: 25,
+    night: 26,
+    coffee: 27,
+    winter: 28,
+    dim: 29,
+    nord: 30,
+    sunset: 31,
+    caramellatte: 32,
+    abyss: 33,
+    silk: 34
+  }
 
   generates_token_for :email_verification, expires_in: 2.days do
     email

@@ -8,6 +8,7 @@
 #  otp_secret               :string           not null
 #  password_digest          :string           not null
 #  provider                 :string
+#  theme                    :integer          default("light"), not null
 #  uid                      :string
 #  username                 :string
 #  verified                 :boolean          default(FALSE), not null

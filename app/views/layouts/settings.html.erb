@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-controller="theme" data-theme="<%= Current.user&.theme || 'light' %>" data-saved-theme="<%= Current.user&.theme %>">
   <head>
     <title><%= content_for(:title) || t("application.name") %> - <%= t("settings.title") %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -58,6 +58,13 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                   </svg>
                   <%= t("settings.nav.email") %>
+                <% end %>
+
+                <%= link_to settings_appearance_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors #{'bg-base-200 font-semibold' if request.path == settings_appearance_path}" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 3 3 0 005.78-1.128zM12 9.75v3.75m-3-3.75h6m-9 0a3 3 0 013-3h6a3 3 0 013 3m-9 0v3.75m0-3.75a3 3 0 013-3h6a3 3 0 013 3v3.75m-9 0h9m-9 0v3.75m9-3.75v3.75m0-3.75a3 3 0 013-3h3a3 3 0 013 3v3.75m-6-3.75h3" />
+                  </svg>
+                  <%= t("settings.nav.appearance") %>
                 <% end %>
 
                 <%= link_to settings_two_factor_authentication_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors #{'bg-base-200 font-semibold' if request.path.start_with?('/settings/two_factor_authentication')}" do %>

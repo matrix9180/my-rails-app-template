@@ -239,6 +239,7 @@ en:
       profile: "Profile"
       password: "Password"
       email: "Email"
+      appearance: "Appearance"
       two_factor_authentication: "Two-Factor Authentication"
       sessions: "Sessions"
       activity_log: "Activity Log"
@@ -246,6 +247,12 @@ en:
       enabled: "Two-factor authentication is enabled"
       recovery_codes: "Recovery Codes"
       view_recovery_codes: "View Recovery Codes"
+    appearance:
+      title: "Appearance"
+      description: "Choose a theme for your interface. The theme will be applied immediately."
+      theme_label: "Theme"
+      update:
+        theme_updated: "Theme updated successfully"
 
   common:
     back: "Back"
