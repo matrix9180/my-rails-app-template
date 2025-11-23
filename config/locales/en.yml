@@ -105,6 +105,8 @@ en:
       back: "Back"
     update:
       profile_updated: "Your profile has been updated"
+      avatar_updated: "Your avatar has been updated"
+      avatar_update_failed: "Failed to update avatar"
 
   password_resets:
     new:

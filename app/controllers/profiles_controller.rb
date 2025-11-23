@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_user
-  before_action :require_sudo, only: [ :edit, :update ]
+  before_action :require_sudo, only: [ :edit, :update, :update_avatar ]
 
   def my_profile
     @user = Current.user
@@ -21,6 +21,15 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def update_avatar
+    @user = Current.user
+    if @user.update(avatar_params)
+      redirect_to edit_my_profile_path, notice: t("profiles.update.avatar_updated")
+    else
+      redirect_to edit_my_profile_path, alert: t("profiles.update.avatar_update_failed")
+    end
+  end
+
   private
     def set_user
       if action_name == "show"
@@ -31,6 +40,10 @@ class ProfilesController < ApplicationController
     end
 
     def profile_params
-      params.require(:user).permit(:avatar, :bio)
+      params.require(:user).permit(:bio)
+    end
+
+    def avatar_params
+      params.require(:user).permit(:avatar)
     end
 end

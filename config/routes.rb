@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get "profile/edit", to: "profiles#edit", as: :edit_my_profile
   patch "profile", to: "profiles#update", as: :update_my_profile
   put "profile", to: "profiles#update"
+  patch "profile/avatar", to: "profiles#update_avatar", as: :update_my_profile_avatar
+  put "profile/avatar", to: "profiles#update_avatar"
   resources :profiles, only: [ :show ]
   namespace :identity do
     resource :email,              only: [ :edit, :update ]

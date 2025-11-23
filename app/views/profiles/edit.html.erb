@@ -1,7 +1,23 @@
 <div class="max-w-2xl mx-auto mt-8">
   <div class="card bg-base-100 shadow-xl">
     <div class="card-body">
-      <h1 class="card-title text-3xl mb-6 justify-center"><%= t("profiles.edit.title") %></h1>
+      <div class="flex flex-col items-center mb-6">
+        <div class="relative mb-4">
+          <% if @user.avatar.attached? %>
+            <%= image_tag @user.avatar, class: "w-32 h-32 rounded-full object-cover" %>
+          <% else %>
+            <div class="w-32 h-32 rounded-full bg-base-300 flex items-center justify-center text-4xl font-semibold">
+              <%= @user.username.first.upcase %>
+            </div>
+          <% end %>
+          <label for="avatar-modal" class="absolute bottom-0 right-0 btn btn-circle btn-sm btn-primary cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+          </label>
+        </div>
+        <h1 class="card-title text-3xl mb-2">@<%= @user.username %></h1>
+      </div>
 
       <%= form_with(model: @user, url: update_my_profile_path, method: :patch, multipart: true, class: "space-y-6") do |form| %>
         <% if @user.errors.any? %>
@@ -22,21 +38,6 @@
 
         <div class="form-control w-full">
           <label class="label">
-            <span class="label-text"><%= t("profiles.edit.avatar") %></span>
-          </label>
-          <% if @user.avatar.attached? %>
-            <div class="mb-4">
-              <%= image_tag @user.avatar, class: "w-32 h-32 rounded-full object-cover" %>
-            </div>
-          <% end %>
-          <%= form.file_field :avatar, accept: "image/*", class: "file-input file-input-bordered w-full" %>
-          <label class="label">
-            <span class="label-text-alt text-base-content/70"><%= t("profiles.edit.avatar_hint") %></span>
-          </label>
-        </div>
-
-        <div class="form-control w-full">
-          <label class="label">
             <span class="label-text"><%= t("profiles.edit.bio") %></span>
           </label>
           <%= form.rich_text_area :bio %>
@@ -53,4 +54,62 @@
     </div>
   </div>
 </div>
+
+<!-- Avatar Modal -->
+<input type="checkbox" id="avatar-modal" class="modal-toggle" />
+<div class="modal" role="dialog">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg mb-4"><%= t("profiles.edit.avatar") %></h3>
+    <%= form_with(model: @user, url: update_my_profile_avatar_path, method: :patch, multipart: true, class: "space-y-4", data: { turbo: false }) do |form| %>
+      <div class="form-control w-full">
+        <% if @user.avatar.attached? %>
+          <div class="mb-4 flex justify-center">
+            <%= image_tag @user.avatar, class: "w-32 h-32 rounded-full object-cover", id: "avatar-preview" %>
+          </div>
+        <% else %>
+          <div class="mb-4 flex justify-center">
+            <div class="w-32 h-32 rounded-full bg-base-300 flex items-center justify-center text-4xl font-semibold" id="avatar-preview-placeholder">
+              <%= @user.username.first.upcase %>
+            </div>
+          </div>
+        <% end %>
+        <%= form.file_field :avatar, accept: "image/*", id: "user_avatar", class: "file-input file-input-bordered w-full" %>
+        <label class="label">
+          <span class="label-text-alt text-base-content/70"><%= t("profiles.edit.avatar_hint") %></span>
+        </label>
+      </div>
+      <div class="modal-action">
+        <label for="avatar-modal" class="btn btn-ghost">Cancel</label>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </div>
+    <% end %>
+  </div>
+  <label class="modal-backdrop" for="avatar-modal"></label>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('user_avatar');
+    const avatarPreview = document.getElementById('avatar-preview');
+    const avatarPreviewPlaceholder = document.getElementById('avatar-preview-placeholder');
+
+    if (fileInput) {
+      fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          // Show preview
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            if (avatarPreview) {
+              avatarPreview.src = e.target.result;
+            } else if (avatarPreviewPlaceholder) {
+              avatarPreviewPlaceholder.innerHTML = '<img src="' + e.target.result + '" class="w-32 h-32 rounded-full object-cover" id="avatar-preview" />';
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+  });
+</script>
 
