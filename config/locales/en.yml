@@ -40,7 +40,7 @@ en:
     new:
       title: "Sign up"
       username: "Username"
-      username_hint: "Alphanumeric characters only"
+      username_hint: "Letters, numbers, dashes, and underscores only"
       email_address: "Email address"
       password: "Password"
       confirm_password: "Confirm password"
@@ -267,3 +267,9 @@ en:
       prohibited: "error prohibited this user from being saved:"
       errors: "errors prohibited this user from being saved:"
     try_again_later: "Try again later"
+
+  errors:
+    username:
+      invalid_format: "must contain only letters, numbers, dashes, and underscores"
+    password:
+      pwned: "might easily be guessed"

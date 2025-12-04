@@ -47,8 +47,8 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:username) }
     it { should allow_value("username123").for(:username) }
     it { should allow_value("User123").for(:username) }
-    it { should_not allow_value("user_name").for(:username) }
-    it { should_not allow_value("user-name").for(:username) }
+    it { should allow_value("user_name").for(:username) }
+    it { should allow_value("user-name").for(:username) }
     it { should_not allow_value("user name").for(:username) }
     it { should_not allow_value("user@name").for(:username) }
 

@@ -24,7 +24,7 @@ A comprehensive Rails 8.1 starter template with authentication, user profiles, a
 - **User Profiles** - Public user profiles with username-based URLs
 - **User Avatars** - Profile picture uploads via Active Storage
 - **Rich Text Bios** - Action Text integration for rich text user bios
-- **Username System** - Unique, alphanumeric usernames with case-insensitive validation
+- **Username System** - Unique usernames (letters, numbers, dashes, underscores) with case-insensitive validation
 - **Email Management** - Change email with verification requirement
 
 ### UI & Frontend
