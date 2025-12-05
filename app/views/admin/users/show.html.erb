@@ -60,14 +60,24 @@
           <div class="space-y-3">
             <div class="card bg-base-200">
               <div class="card-body">
-                <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.show.active_sessions") %></p>
-                <p class="text-2xl font-bold"><%= @user.sessions.count %></p>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.show.active_sessions") %></p>
+                    <p class="text-2xl font-bold"><%= @user.sessions.count %></p>
+                  </div>
+                  <%= link_to t("admin.users.show.view_sessions"), admin_user_sessions_path(@user), class: "btn btn-sm btn-primary" %>
+                </div>
               </div>
             </div>
             <div class="card bg-base-200">
               <div class="card-body">
-                <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.show.total_events") %></p>
-                <p class="text-2xl font-bold"><%= @user.events.count %></p>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.show.total_events") %></p>
+                    <p class="text-2xl font-bold"><%= @user.events.count %></p>
+                  </div>
+                  <%= link_to t("admin.users.show.view_events"), admin_user_events_path(@user), class: "btn btn-sm btn-primary" %>
+                </div>
               </div>
             </div>
             <div class="card bg-base-200">
@@ -76,14 +86,25 @@
                 <p class="text-2xl font-bold"><%= @user.recovery_codes.count %></p>
               </div>
             </div>
-            <% if @user.avatar.attached? %>
-              <div class="card bg-base-200">
-                <div class="card-body">
-                  <p class="text-sm font-semibold text-base-content/70 mb-2"><%= t("admin.users.show.avatar") %></p>
-                  <%= image_tag @user.avatar, class: "w-24 h-24 rounded-full object-cover" %>
+            <div class="card bg-base-200">
+              <div class="card-body">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <p class="text-sm font-semibold text-base-content/70 mb-2"><%= t("admin.users.show.avatar") %></p>
+                    <% if @user.avatar.attached? %>
+                      <%= link_to admin_user_avatar_path(@user) do %>
+                        <%= image_tag @user.avatar, class: "w-24 h-24 rounded-full object-cover cursor-pointer hover:opacity-80 transition-opacity" %>
+                      <% end %>
+                    <% else %>
+                      <p class="text-sm text-base-content/50"><%= t("admin.users.show.no_avatar") %></p>
+                    <% end %>
+                  </div>
+                  <% if @user.avatar.attached? %>
+                    <%= link_to t("admin.users.show.view_avatar"), admin_user_avatar_path(@user), class: "btn btn-sm btn-primary" %>
+                  <% end %>
                 </div>
               </div>
-            <% end %>
+            </div>
           </div>
         </div>
       </div>

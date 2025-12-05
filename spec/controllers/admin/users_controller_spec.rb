@@ -231,4 +231,3 @@ RSpec.describe Admin::UsersController, type: :request do
     end
   end
 end
-

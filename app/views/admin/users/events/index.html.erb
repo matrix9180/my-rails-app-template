@@ -1,0 +1,53 @@
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="card-title text-3xl"><%= t("admin.users.events.index.title", username: @user.username) %></h1>
+      <div class="flex gap-2">
+        <%= link_to t("admin.users.events.index.back_to_user"), admin_user_path(@user), class: "btn btn-ghost" %>
+      </div>
+    </div>
+
+    <% if @events.any? %>
+      <div id="events" class="space-y-4">
+        <% @events.each do |event| %>
+          <div id="<%= dom_id event %>" class="card bg-base-200">
+            <div class="card-body">
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                  <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.events.index.action") %></p>
+                  <p class="text-sm">
+                    <span class="badge badge-primary"><%= event.action %></span>
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.events.index.user_agent") %></p>
+                  <p class="text-sm break-words"><%= event.user_agent %></p>
+                </div>
+
+                <div>
+                  <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.events.index.ip_address") %></p>
+                  <p class="text-sm"><%= event.ip_address %></p>
+                </div>
+
+                <div>
+                  <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.events.index.created_at") %></p>
+                  <p class="text-sm"><%= event.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="mt-6">
+        <%= paginate @events %>
+      </div>
+    <% else %>
+      <div class="alert alert-info">
+        <p><%= t("admin.users.events.index.no_events") %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
+

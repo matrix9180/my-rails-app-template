@@ -55,7 +55,15 @@ Rails.application.routes.draw do
   # Admin pages
   namespace :admin do
     root "users#index"
-    resources :users
+    resources :users do
+      resources :events, only: [ :index ], controller: "users/events"
+      resources :sessions, only: [ :index, :destroy ], controller: "users/sessions" do
+        collection do
+          delete :destroy_all
+        end
+      end
+      resource :avatar, only: [ :show, :destroy ], controller: "users/avatars"
+    end
   end
 
   root "home#index"

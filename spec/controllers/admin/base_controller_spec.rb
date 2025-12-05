@@ -36,4 +36,3 @@ RSpec.describe Admin::BaseController, type: :request do
     end
   end
 end
-

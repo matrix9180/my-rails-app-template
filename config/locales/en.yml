@@ -316,6 +316,10 @@ en:
         total_events: "Total Events"
         recovery_codes: "Recovery Codes"
         avatar: "Avatar"
+        view_sessions: "View Sessions"
+        view_events: "View Events"
+        view_avatar: "View Avatar"
+        no_avatar: "No Avatar"
       edit:
         title: "Edit User"
         email: "Email Address"
@@ -333,6 +337,46 @@ en:
       destroy:
         user_deleted: "User has been deleted successfully"
         cannot_delete_self: "You cannot delete your own account"
+      events:
+        index:
+          title: "Events for %{username}"
+          back_to_user: "Back to User"
+          action: "Action"
+          user_agent: "User Agent"
+          ip_address: "IP Address"
+          created_at: "Created at"
+          no_events: "This user has no events"
+      sessions:
+        index:
+          title: "Sessions for %{username}"
+          back_to_user: "Back to User"
+          sign_out_all: "Sign Out All Sessions"
+          confirm_sign_out_all: "Are you sure you want to sign out all sessions for this user?"
+          user_agent: "User Agent"
+          ip_address: "IP Address"
+          created_at: "Created at"
+          sign_out: "Sign Out"
+          sudo_active: "Sudo Active"
+          no_sessions: "This user has no active sessions"
+        destroy:
+          session_logged_out: "Session has been logged out successfully"
+        destroy_all:
+          all_sessions_logged_out: "All sessions have been logged out successfully"
+      avatars:
+        show:
+          title: "Avatar for %{username}"
+          back_to_user: "Back to User"
+          delete_avatar: "Delete Avatar"
+          confirm_delete: "Are you sure you want to delete this avatar?"
+          no_avatar: "This user has no avatar"
+          avatar_details: "Avatar Details"
+          filename: "Filename"
+          content_type: "Content Type"
+          file_size: "File Size"
+          uploaded_at: "Uploaded At"
+          view_full_size: "View Full Size"
+        destroy:
+          avatar_deleted: "Avatar has been deleted successfully"
 
   common:
     back: "Back"

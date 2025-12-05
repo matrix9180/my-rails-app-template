@@ -85,6 +85,73 @@ The application includes a comprehensive settings system accessible at `/setting
 - **Event Details** - Shows action, user agent, IP address, and timestamp
 - **Chronological Order** - Events sorted by most recent first
 
+### Admin Panel
+
+The application includes a comprehensive admin panel for user management, accessible at `/admin` (admin-only access).
+
+#### User Management (`/admin/users`)
+- **User List** - Paginated table of all users with key information
+- **Search Functionality** - Search users by username or email (case-insensitive)
+- **Role Filtering** - Filter users by role (user/admin)
+- **User Details** - View comprehensive user information including:
+  - Username, email, role, and verification status
+  - Account creation and update timestamps
+  - Active sessions count (with link to view sessions)
+  - Total events count (with link to view events)
+  - Recovery codes count
+  - Avatar display (with link to view avatar)
+- **User Editing** - Edit user attributes:
+  - Email address
+  - Username
+  - Role (admin/user) - *Note: Admins cannot change their own role*
+  - Email verification status
+- **User Deletion** - Delete users with confirmation dialog
+  - *Note: Admins cannot delete themselves*
+- **Pagination** - 25 users per page with navigation controls
+- **Sidebar Navigation** - Admin panel uses the same sidebar layout as settings for consistency
+
+#### User Events (`/admin/users/:username/events`)
+- **Event History** - Paginated list of all events for a specific user
+- **Event Details** - Shows action, user agent, IP address, and timestamp
+- **Chronological Order** - Events sorted by most recent first (created_at desc)
+- **Pagination** - 25 events per page with navigation controls
+- **Event Types** - Tracks sign in, sign out, password changes, email verification, etc.
+- **Read-Only** - Events are logged automatically and cannot be edited or deleted
+
+#### User Sessions (`/admin/users/:username/sessions`)
+- **Active Sessions List** - View all active sessions for a specific user
+- **Session Details** - Shows user agent, IP address, creation date, and sudo status
+- **Individual Sign Out** - Sign out individual user sessions remotely
+- **Sign Out All** - Sign out all sessions for a user at once
+- **Session Revocation** - Automatically creates "signed_out" events when sessions are destroyed
+- **Sudo Indicator** - Visual badge showing which sessions have active sudo mode
+
+#### User Avatars (`/admin/users/:username/avatar`)
+- **Avatar View** - View user's avatar in full size with details
+- **Avatar Information** - Displays filename, content type, file size, and upload date
+- **Full Size Preview** - Link to view avatar at full resolution
+- **Avatar Deletion** - Delete user's avatar with confirmation dialog
+- **No Avatar Handling** - Graceful handling when user has no avatar
+
+#### Admin Authorization
+- **Role-Based Access** - Only users with `admin` role can access admin panel
+- **Automatic Redirects** - Non-admin users are redirected to home page with alert message
+- **Header Navigation** - Admin link appears in user dropdown menu (visible only to admins)
+
+#### Admin Routes
+- `/admin` - Admin dashboard (redirects to users index)
+- `/admin/users` - User management index
+- `/admin/users/:username` - View user details
+- `/admin/users/:username/edit` - Edit user
+- `PATCH /admin/users/:username` - Update user
+- `DELETE /admin/users/:username` - Delete user
+- `/admin/users/:username/events` - View user's events (paginated)
+- `/admin/users/:username/sessions` - View and manage user's sessions
+- `DELETE /admin/users/:username/sessions/:id` - Sign out individual session
+- `DELETE /admin/users/:username/sessions/destroy_all` - Sign out all sessions
+- `/admin/users/:username/avatar` - View user's avatar
+- `DELETE /admin/users/:username/avatar` - Delete user's avatar
+
 ### UI & Frontend
 
 - **Tailwind CSS 4** - Utility-first CSS framework via `tailwindcss-rails` gem (no Node.js required)
@@ -163,9 +230,11 @@ The application includes a comprehensive settings system accessible at `/setting
 
 The seed file creates sample users for development:
 
-- `admin@example.com` (username: `admin`, password: `password123456`) - with avatar
-- `user@example.com` (username: `user`, password: `password123456`) - with avatar
-- `unverified@example.com` (username: `unverified`, password: `password123456`) - unverified
+- `admin@example.com` (username: `admin`, password: `password123456`) - Admin user with avatar
+- `user@example.com` (username: `user`, password: `password123456`) - Regular user with avatar
+- `unverified@example.com` (username: `unverified`, password: `password123456`) - Unverified user
+
+**Note:** The admin user can access the admin panel at `/admin` to manage all users.
 
 ### Running Tests
 
@@ -242,6 +311,15 @@ Key routes include:
 - `/settings/two_factor_authentication/recovery_codes` - Recovery codes
 - `/settings/sessions` - Session management
 - `/settings/events` - Activity log
+
+#### Admin Routes
+- `/admin` - Admin dashboard (redirects to users index)
+- `/admin/users` - User management (list, search, filter)
+- `/admin/users/:username` - View user details
+- `/admin/users/:username/edit` - Edit user
+- `/admin/users/:username/events` - View user's events (paginated, read-only)
+- `/admin/users/:username/sessions` - View and manage user's sessions
+- `/admin/users/:username/avatar` - View user's avatar details
 
 #### Other Routes
 - `/authentications/events` - Activity log (alternative route)

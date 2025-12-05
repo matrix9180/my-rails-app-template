@@ -1,0 +1,55 @@
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="card-title text-3xl"><%= t("admin.users.avatars.show.title", username: @user.username) %></h1>
+      <div class="flex gap-2">
+        <%= link_to t("admin.users.avatars.show.back_to_user"), admin_user_path(@user), class: "btn btn-ghost" %>
+        <% if @user.avatar.attached? %>
+          <%= button_to t("admin.users.avatars.show.delete_avatar"), admin_user_avatar_path(@user), 
+              method: :delete,
+              data: { turbo_confirm: t("admin.users.avatars.show.confirm_delete") },
+              class: "btn btn-error" %>
+        <% end %>
+      </div>
+    </div>
+
+    <% if @user.avatar.attached? %>
+      <div class="space-y-6">
+        <div class="flex justify-center">
+          <%= image_tag @user.avatar, class: "max-w-full h-auto rounded-lg shadow-lg" %>
+        </div>
+        <div class="card bg-base-200">
+          <div class="card-body">
+            <h2 class="text-xl font-semibold mb-4"><%= t("admin.users.avatars.show.avatar_details") %></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.avatars.show.filename") %></p>
+                <p class="text-sm"><%= @user.avatar.filename %></p>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.avatars.show.content_type") %></p>
+                <p class="text-sm"><%= @user.avatar.content_type %></p>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.avatars.show.file_size") %></p>
+                <p class="text-sm"><%= number_to_human_size(@user.avatar.byte_size) %></p>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.avatars.show.uploaded_at") %></p>
+                <p class="text-sm"><%= @user.avatar.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <%= link_to t("admin.users.avatars.show.view_full_size"), url_for(@user.avatar), target: "_blank", class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% else %>
+      <div class="alert alert-info">
+        <p><%= t("admin.users.avatars.show.no_avatar") %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
+

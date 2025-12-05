@@ -3,18 +3,18 @@ class Admin::UsersController < Admin::BaseController
 
   def index
     @users = User.all.order(created_at: :desc)
-    
+
     # Search functionality
     if params[:search].present?
       search_term = "%#{params[:search]}%"
       @users = @users.where("LOWER(username) LIKE ? OR LOWER(email) LIKE ?", search_term.downcase, search_term.downcase)
     end
-    
+
     # Filter by role
     if params[:role].present?
       @users = @users.where(role: params[:role])
     end
-    
+
     # Pagination
     @users = @users.page(params[:page]).per(25)
   end
@@ -31,7 +31,7 @@ class Admin::UsersController < Admin::BaseController
     if @user == Current.user
       params_to_use = params_to_use.except(:role)
     end
-    
+
     if @user.update(params_to_use)
       redirect_to admin_user_path(@user), notice: t("admin.users.update.user_updated")
     else
@@ -57,4 +57,3 @@ class Admin::UsersController < Admin::BaseController
       params.require(:user).permit(:email, :username, :role, :verified)
     end
 end
-

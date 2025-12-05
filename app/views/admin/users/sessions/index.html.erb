@@ -1,0 +1,57 @@
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="card-title text-3xl"><%= t("admin.users.sessions.index.title", username: @user.username) %></h1>
+      <div class="flex gap-2">
+        <%= link_to t("admin.users.sessions.index.back_to_user"), admin_user_path(@user), class: "btn btn-ghost" %>
+        <% if @sessions.any? %>
+          <%= button_to t("admin.users.sessions.index.sign_out_all"), destroy_all_admin_user_sessions_path(@user), 
+              method: :delete,
+              data: { turbo_confirm: t("admin.users.sessions.index.confirm_sign_out_all") },
+              class: "btn btn-error" %>
+        <% end %>
+      </div>
+    </div>
+
+    <% if @sessions.any? %>
+      <div id="sessions" class="space-y-4">
+        <% @sessions.each do |session| %>
+          <div id="<%= dom_id session %>" class="card bg-base-200">
+            <div class="card-body">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.sessions.index.user_agent") %></p>
+                  <p class="text-sm break-words"><%= session.user_agent %></p>
+                </div>
+
+                <div>
+                  <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.sessions.index.ip_address") %></p>
+                  <p class="text-sm"><%= session.ip_address %></p>
+                </div>
+
+                <div>
+                  <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.sessions.index.created_at") %></p>
+                  <p class="text-sm"><%= session.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+                  <% if session.sudo? %>
+                    <span class="badge badge-success badge-sm mt-1"><%= t("admin.users.sessions.index.sudo_active") %></span>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="card-actions justify-end mt-4">
+                <%= button_to t("admin.users.sessions.index.sign_out"), admin_user_session_path(@user, session), 
+                    method: :delete, 
+                    class: "btn btn-error btn-sm" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="alert alert-info">
+        <p><%= t("admin.users.sessions.index.no_sessions") %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
