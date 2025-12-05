@@ -26,7 +26,13 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def update
-    if @user.update(user_params)
+    params_to_use = user_params
+    # Prevent current user from changing their own role
+    if @user == Current.user
+      params_to_use = params_to_use.except(:role)
+    end
+    
+    if @user.update(params_to_use)
       redirect_to admin_user_path(@user), notice: t("admin.users.update.user_updated")
     else
       render :edit, status: :unprocessable_content
@@ -44,7 +50,7 @@ class Admin::UsersController < Admin::BaseController
 
   private
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by!(username: params[:id]&.downcase)
     end
 
     def user_params

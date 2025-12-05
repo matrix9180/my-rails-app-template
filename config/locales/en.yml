@@ -323,6 +323,7 @@ en:
         role: "Role"
         role_user: "User"
         role_admin: "Admin"
+        role_disabled_hint: "You cannot change your own role"
         verified: "Email Verified"
         verified_hint: "Check this box if the user's email has been verified"
         cancel: "Cancel"

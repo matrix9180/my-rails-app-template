@@ -37,10 +37,20 @@
         <label class="label">
           <span class="label-text"><%= t("admin.users.edit.role") %></span>
         </label>
-        <%= form.select :role, options_for_select([
-          [t("admin.users.edit.role_user"), "user"],
-          [t("admin.users.edit.role_admin"), "admin"]
-        ], @user.role), {}, { class: "select select-bordered w-full" } %>
+        <% if @user == Current.user %>
+          <%= form.select :role, options_for_select([
+            [t("admin.users.edit.role_user"), "user"],
+            [t("admin.users.edit.role_admin"), "admin"]
+          ], @user.role), {}, { class: "select select-bordered w-full", disabled: true } %>
+          <label class="label">
+            <span class="label-text-alt text-base-content/70"><%= t("admin.users.edit.role_disabled_hint") %></span>
+          </label>
+        <% else %>
+          <%= form.select :role, options_for_select([
+            [t("admin.users.edit.role_user"), "user"],
+            [t("admin.users.edit.role_admin"), "admin"]
+          ], @user.role), {}, { class: "select select-bordered w-full" } %>
+        <% end %>
       </div>
 
       <div class="form-control">
