@@ -221,10 +221,7 @@ The application includes a comprehensive admin panel for user management, access
    bin/dev
    ```
 
-   Or use the traditional approach:
-   ```bash
-   bin/rails server
-   ```
+   **Note:** Use `bin/dev` to ensure Tailwind CSS stylesheets are generated. Using `bin/rails server` directly will not generate stylesheets.
 
 ### Development Seeds
 
