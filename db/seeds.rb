@@ -9,6 +9,7 @@ if Rails.env.development?
     user.password = "password123456"
     user.password_confirmation = "password123456"
     user.verified = true
+    user.role = "admin"
   end
 
   # Attach avatar to admin if not already attached
