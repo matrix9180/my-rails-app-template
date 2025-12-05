@@ -22,6 +22,9 @@ en:
       sign_up: "Sign up"
     footer:
       copyright_text: "&copy; %{year} %{rights}"
+      revision: "Revision"
+      uncommitted_changes: "●"
+      uncommitted_changes_tooltip: "This deployment has uncommitted changes"
 
   home:
     index:
