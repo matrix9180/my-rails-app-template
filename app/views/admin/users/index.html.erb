@@ -84,7 +84,11 @@
                   <div class="flex justify-end gap-2">
                     <%= link_to t("admin.users.index.view"), admin_user_path(user), class: "btn btn-sm btn-ghost" %>
                     <%= link_to t("admin.users.index.edit"), edit_admin_user_path(user), class: "btn btn-sm btn-primary" %>
-                    <% unless user == Current.user %>
+                    <% if user == Current.user %>
+                      <button class="btn btn-sm btn-error" disabled aria-label="<%= t("admin.users.index.cannot_delete_self_tooltip") %>">
+                        <%= t("admin.users.index.delete") %>
+                      </button>
+                    <% else %>
                       <%= button_to t("admin.users.index.delete"), admin_user_path(user), method: :delete, 
                           data: { turbo_confirm: t("admin.users.index.confirm_delete", username: user.username) },
                           class: "btn btn-sm btn-error" %>

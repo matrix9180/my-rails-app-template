@@ -295,6 +295,7 @@ en:
         edit: "Edit"
         delete: "Delete"
         confirm_delete: "Are you sure you want to delete user %{username}? This action cannot be undone."
+        cannot_delete_self_tooltip: "You cannot delete your own account"
         no_users_found: "No users found"
       show:
         title: "User Details"
