@@ -223,6 +223,8 @@ en:
         index:
           title: "Two-factor recovery codes"
           description: "Recovery codes provide a way to log in if you lose your phone (or don't have it with you). Save these and keep them somewhere safe."
+          show_codes: "Show recovery codes"
+          hide_codes: "Hide recovery codes"
           ok_done: "OK, I'm done"
           need_new_codes: "Need new recovery codes?"
           need_new_codes_description: "If you think your codes have fallen into the wrong hands, you can get a new set. Be sure to save the new ones because the old codes will stop working."

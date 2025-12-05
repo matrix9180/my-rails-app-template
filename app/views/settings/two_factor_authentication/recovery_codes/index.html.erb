@@ -8,16 +8,23 @@
       <span><%= t("two_factor_authentication.profile.recovery_codes.index.description") %></span>
     </div>
 
-    <div class="card bg-base-200 p-6 mb-6">
-      <ul class="space-y-2 font-mono text-center">
-        <% @recovery_codes.each do |recovery_code| %>
-          <% if recovery_code.used? %>
-            <li class="text-base-content/50 line-through"><%= recovery_code.code %></li>
-          <% else %>
-            <li class="text-lg font-semibold"><%= recovery_code.code %></li>
+    <div data-controller="toggle">
+      <div class="mb-4">
+        <button type="button" data-toggle-target="button" data-action="click->toggle#toggle" data-show-text="<%= t('two_factor_authentication.profile.recovery_codes.index.show_codes') %>" data-hide-text="<%= t('two_factor_authentication.profile.recovery_codes.index.hide_codes') %>" class="btn btn-outline">
+          <%= t('two_factor_authentication.profile.recovery_codes.index.show_codes') %>
+        </button>
+      </div>
+      <div data-toggle-target="content" class="card bg-base-200 p-6 mb-6 hidden">
+        <ul class="space-y-2 font-mono text-center">
+          <% @recovery_codes.each do |recovery_code| %>
+            <% if recovery_code.used? %>
+              <li class="text-base-content/50 line-through"><%= recovery_code.code %></li>
+            <% else %>
+              <li class="text-lg font-semibold"><%= recovery_code.code %></li>
+            <% end %>
           <% end %>
-        <% end %>
-      </ul>
+        </ul>
+      </div>
     </div>
 
     <div class="card-actions justify-end mb-6">
