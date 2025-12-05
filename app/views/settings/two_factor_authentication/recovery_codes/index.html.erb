@@ -8,14 +8,19 @@
       <span><%= t("two_factor_authentication.profile.recovery_codes.index.description") %></span>
     </div>
 
-    <div data-controller="toggle">
+    <div data-controller="toggle clipboard">
       <div class="mb-4">
         <button type="button" data-toggle-target="button" data-action="click->toggle#toggle" data-show-text="<%= t('two_factor_authentication.profile.recovery_codes.index.show_codes') %>" data-hide-text="<%= t('two_factor_authentication.profile.recovery_codes.index.hide_codes') %>" class="btn btn-outline">
           <%= t('two_factor_authentication.profile.recovery_codes.index.show_codes') %>
         </button>
       </div>
-      <div data-toggle-target="content" class="card bg-base-200 p-6 mb-6 hidden">
-        <ul class="space-y-2 font-mono text-center">
+      <div data-toggle-target="content" class="card bg-base-200 p-6 mb-6 hidden relative">
+        <button type="button" data-action="click->clipboard#copy" title="Copy to clipboard" class="btn btn-sm btn-ghost absolute top-2 right-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+        </button>
+        <ul data-clipboard-target="codeList" class="space-y-2 font-mono text-center">
           <% @recovery_codes.each do |recovery_code| %>
             <% if recovery_code.used? %>
               <li class="text-base-content/50 line-through"><%= recovery_code.code %></li>
