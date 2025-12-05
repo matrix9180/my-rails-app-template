@@ -1,0 +1,93 @@
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="card-title text-3xl"><%= t("admin.users.show.title") %></h1>
+      <div class="flex gap-2">
+        <%= link_to t("admin.users.show.back_to_list"), admin_users_path, class: "btn btn-ghost" %>
+        <%= link_to t("admin.users.show.edit"), edit_admin_user_path(@user), class: "btn btn-primary" %>
+        <% unless @user == Current.user %>
+          <%= button_to t("admin.users.show.delete"), admin_user_path(@user), method: :delete,
+              data: { turbo_confirm: t("admin.users.show.confirm_delete", username: @user.username) },
+              class: "btn btn-error" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- User Info -->
+      <div class="space-y-4">
+        <div>
+          <h2 class="text-xl font-semibold mb-4"><%= t("admin.users.show.user_information") %></h2>
+          <div class="space-y-3">
+            <div>
+              <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.show.username") %></p>
+              <p class="text-lg"><%= @user.username %></p>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.show.email") %></p>
+              <p class="text-lg"><%= @user.email %></p>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.show.role") %></p>
+              <span class="badge <%= @user.admin? ? 'badge-warning' : 'badge-info' %> text-lg">
+                <%= @user.role.humanize %>
+              </span>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.show.verified") %></p>
+              <% if @user.verified? %>
+                <span class="badge badge-success text-lg"><%= t("admin.users.show.verified_yes") %></span>
+              <% else %>
+                <span class="badge badge-error text-lg"><%= t("admin.users.show.verified_no") %></span>
+              <% end %>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.show.created_at") %></p>
+              <p class="text-lg"><%= @user.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.show.updated_at") %></p>
+              <p class="text-lg"><%= @user.updated_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistics -->
+      <div class="space-y-4">
+        <div>
+          <h2 class="text-xl font-semibold mb-4"><%= t("admin.users.show.statistics") %></h2>
+          <div class="space-y-3">
+            <div class="card bg-base-200">
+              <div class="card-body">
+                <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.show.active_sessions") %></p>
+                <p class="text-2xl font-bold"><%= @user.sessions.count %></p>
+              </div>
+            </div>
+            <div class="card bg-base-200">
+              <div class="card-body">
+                <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.show.total_events") %></p>
+                <p class="text-2xl font-bold"><%= @user.events.count %></p>
+              </div>
+            </div>
+            <div class="card bg-base-200">
+              <div class="card-body">
+                <p class="text-sm font-semibold text-base-content/70"><%= t("admin.users.show.recovery_codes") %></p>
+                <p class="text-2xl font-bold"><%= @user.recovery_codes.count %></p>
+              </div>
+            </div>
+            <% if @user.avatar.attached? %>
+              <div class="card bg-base-200">
+                <div class="card-body">
+                  <p class="text-sm font-semibold text-base-content/70 mb-2"><%= t("admin.users.show.avatar") %></p>
+                  <%= image_tag @user.avatar, class: "w-24 h-24 rounded-full object-cover" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

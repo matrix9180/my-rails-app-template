@@ -39,6 +39,9 @@
             <li><hr class="my-2"></li>
             <li><%= link_to t("layout.header.home"), root_path %></li>
             <li><%= link_to t("layout.header.settings"), settings_path %></li>
+            <% if Current.user&.admin? %>
+              <li><%= link_to t("layout.header.admin"), admin_users_path %></li>
+            <% end %>
             <li><hr class="my-2"></li>
             <li>
               <%= button_to t("layout.header.log_out"), settings_session_path(Current.session), method: :delete, class: "text-error w-full text-left", data: { turbo: false } %>

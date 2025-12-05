@@ -52,6 +52,12 @@ Rails.application.routes.draw do
     resources :events, only: [ :index ]
   end
 
+  # Admin pages
+  namespace :admin do
+    root "users#index"
+    resources :users
+  end
+
   root "home#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

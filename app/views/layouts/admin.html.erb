@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html data-controller="theme" data-theme="<%= Current.user&.theme || 'light' %>" data-saved-theme="<%= Current.user&.theme %>">
+  <head>
+    <title><%= content_for(:title) || t("application.name") %> - <%= t("admin.title") %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="<%= t("application.name") %>">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "lexxy" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="min-h-screen flex flex-col">
+    <%= render "header" %>
+
+    <div class="fixed top-16 left-0 right-0 z-40 pointer-events-none pt-2">
+      <div class="container mx-auto px-5">
+        <div class="pointer-events-auto space-y-2">
+          <%= render "flash" %>
+        </div>
+      </div>
+    </div>
+
+    <main class="container mx-auto px-5 py-8 flex-1 pt-40">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col lg:flex-row gap-8">
+          <!-- Sidebar -->
+          <aside class="lg:w-64 flex-shrink-0">
+            <div class="sticky top-24">
+              <h2 class="text-xl font-semibold mb-4"><%= t("admin.title") %></h2>
+              <%= render "admin/sidebar" %>
+            </div>
+          </aside>
+
+          <!-- Main Content -->
+          <div class="flex-1 min-w-0">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <%= render "footer" %>
+  </body>
+</html>
+
