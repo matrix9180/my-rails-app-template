@@ -87,7 +87,7 @@ The application includes a comprehensive settings system accessible at `/setting
 
 ### UI & Frontend
 
-- **Tailwind CSS** - Utility-first CSS framework
+- **Tailwind CSS 4** - Utility-first CSS framework via `tailwindcss-rails` gem (no Node.js required)
 - **DaisyUI** - Beautiful component library built on Tailwind
 - **Hotwire (Turbo + Stimulus)** - Modern, lightweight JavaScript framework
 - **Responsive Design** - Mobile-first responsive layout
@@ -129,7 +129,6 @@ The application includes a comprehensive settings system accessible at `/setting
 ### Prerequisites
 
 - Ruby 3.3+ (check `.ruby-version`)
-- Node.js and npm (for Tailwind CSS)
 - SQLite3
 
 ### Installation
