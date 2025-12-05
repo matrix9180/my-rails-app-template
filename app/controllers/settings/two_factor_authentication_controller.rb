@@ -1,6 +1,4 @@
-class Settings::TwoFactorAuthenticationController < ApplicationController
-  layout "settings"
-  before_action :set_user
+class Settings::TwoFactorAuthenticationController < Settings::BaseController
   before_action :set_totp, only: %i[ show create ]
 
   def show
@@ -22,10 +20,6 @@ class Settings::TwoFactorAuthenticationController < ApplicationController
   end
 
   private
-    def set_user
-      @user = Current.user
-    end
-
     def set_totp
       @totp = ROTP::TOTP.new(@user.otp_secret, issuer: "YourAppName")
     end

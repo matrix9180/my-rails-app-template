@@ -7,7 +7,7 @@
       <div class="divider"><%= t("home.index.account_settings") %></div>
 
       <div class="grid gap-4">
-        <%= link_to edit_password_path, class: "btn btn-outline justify-start" do %>
+        <%= link_to settings_password_path, class: "btn btn-outline justify-start" do %>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v-2.25H6v-2.25H4.5V12h2.25l1.757-1.757c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
           </svg>
@@ -29,7 +29,7 @@
         <% end %>
 
         <% if Current.user.otp_required_for_sign_in? %>
-          <%= link_to two_factor_authentication_profile_recovery_codes_path, class: "btn btn-outline justify-start" do %>
+          <%= link_to settings_two_factor_authentication_recovery_codes_path, class: "btn btn-outline justify-start" do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v-2.25H6v-2.25H4.5V12h2.25l1.757-1.757c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
             </svg>
@@ -41,7 +41,7 @@
       <div class="divider"><%= t("home.index.access_history") %></div>
 
       <div class="grid gap-4">
-        <%= link_to sessions_path, class: "btn btn-outline justify-start" do %>
+        <%= link_to settings_sessions_path, class: "btn btn-outline justify-start" do %>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
           </svg>

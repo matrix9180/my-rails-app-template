@@ -41,7 +41,7 @@
             <li><%= link_to t("layout.header.settings"), settings_path %></li>
             <li><hr class="my-2"></li>
             <li>
-              <%= button_to t("layout.header.log_out"), session_path(Current.session), method: :delete, class: "text-error w-full text-left", data: { turbo: false } %>
+              <%= button_to t("layout.header.log_out"), settings_session_path(Current.session), method: :delete, class: "text-error w-full text-left", data: { turbo: false } %>
             </li>
           </ul>
         </div>

@@ -1,7 +1,4 @@
-class Settings::TwoFactorAuthentication::RecoveryCodesController < ApplicationController
-  layout "settings"
-  before_action :set_user
-
+class Settings::TwoFactorAuthentication::RecoveryCodesController < Settings::BaseController
   def index
     if Current.user.recovery_codes.exists?
       @recovery_codes = @user.recovery_codes
@@ -18,10 +15,6 @@ class Settings::TwoFactorAuthentication::RecoveryCodesController < ApplicationCo
   end
 
   private
-    def set_user
-      @user = Current.user
-    end
-
     def new_recovery_codes
       10.times.map { { code: new_recovery_code } }
     end

@@ -1,6 +1,4 @@
-class Settings::PasswordsController < ApplicationController
-  layout "settings"
-  before_action :set_user
+class Settings::PasswordsController < Settings::BaseController
   before_action :require_sudo, only: [ :show, :update ]
 
   def show
@@ -50,10 +48,6 @@ class Settings::PasswordsController < ApplicationController
   end
 
   private
-    def set_user
-      @user = Current.user
-    end
-
     def user_params
       params.permit(:password, :password_confirmation)
     end

@@ -1,6 +1,4 @@
-class Settings::EmailsController < ApplicationController
-  layout "settings"
-  before_action :set_user
+class Settings::EmailsController < Settings::BaseController
   before_action :require_sudo, only: [ :show, :update ]
 
   def show
@@ -17,10 +15,6 @@ class Settings::EmailsController < ApplicationController
   end
 
   private
-    def set_user
-      @user = Current.user
-    end
-
     def user_params
       params.permit(:email)
     end

@@ -1,6 +1,4 @@
-class Settings::ProfilesController < ApplicationController
-  layout "settings"
-  before_action :set_user
+class Settings::ProfilesController < Settings::BaseController
   before_action :require_sudo, only: [ :show, :update ]
 
   def show
@@ -15,10 +13,6 @@ class Settings::ProfilesController < ApplicationController
   end
 
   private
-    def set_user
-      @user = Current.user
-    end
-
     def profile_params
       params.require(:user).permit(:avatar, :bio)
     end

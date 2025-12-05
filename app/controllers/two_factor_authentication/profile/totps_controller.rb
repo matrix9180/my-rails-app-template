@@ -9,7 +9,7 @@ class TwoFactorAuthentication::Profile::TotpsController < ApplicationController
   def create
     if @totp.verify(params[:code], drift_behind: 15)
       @user.update! otp_required_for_sign_in: true
-      redirect_to two_factor_authentication_profile_recovery_codes_path
+      redirect_to settings_two_factor_authentication_recovery_codes_path
     else
       redirect_to new_two_factor_authentication_profile_totp_path, alert: t("two_factor_authentication.profile.totps.create.code_didnt_work")
     end
@@ -21,10 +21,6 @@ class TwoFactorAuthentication::Profile::TotpsController < ApplicationController
   end
 
   private
-    def set_user
-      @user = Current.user
-    end
-
     def set_totp
       @totp = ROTP::TOTP.new(@user.otp_secret, issuer: "YourAppName")
     end

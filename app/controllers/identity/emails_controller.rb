@@ -13,10 +13,6 @@ class Identity::EmailsController < ApplicationController
   end
 
   private
-    def set_user
-      @user = Current.user
-    end
-
     def user_params
       params.permit(:email, :password_challenge).with_defaults(password_challenge: "")
     end

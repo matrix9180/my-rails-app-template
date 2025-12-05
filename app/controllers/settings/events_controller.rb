@@ -1,5 +1,4 @@
-class Settings::EventsController < ApplicationController
-  layout "settings"
+class Settings::EventsController < Settings::BaseController
   def index
     @events = Current.user.events.order(created_at: :desc)
   end

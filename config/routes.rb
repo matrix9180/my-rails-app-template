@@ -3,8 +3,7 @@ Rails.application.routes.draw do
   post "sign_in", to: "sessions#create"
   get  "sign_up", to: "registrations#new"
   post "sign_up", to: "registrations#create"
-  resources :sessions, only: [ :index, :show, :destroy ]
-  resource  :password, only: [ :edit, :update ]
+  resources :sessions, only: [ :show ]
 
   resources :profiles, only: [ :show ]
   get "profile", to: "profiles#my_profile", as: :my_profile
@@ -29,7 +28,6 @@ Rails.application.routes.draw do
     end
     namespace :profile do
       resource  :totp,           only: [ :new, :create, :update ]
-      resources :recovery_codes, only: [ :index, :create ]
     end
   end
   get  "/auth/failure",            to: "sessions/omniauth#failure"

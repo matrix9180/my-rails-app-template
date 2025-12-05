@@ -1,7 +1,4 @@
-class Settings::AppearancesController < ApplicationController
-  layout "settings"
-  before_action :set_user
-
+class Settings::AppearancesController < Settings::BaseController
   def show
   end
 
@@ -20,10 +17,6 @@ class Settings::AppearancesController < ApplicationController
   end
 
   private
-    def set_user
-      @user = Current.user
-    end
-
     def user_params
       params.require(:user).permit(:theme)
     end
