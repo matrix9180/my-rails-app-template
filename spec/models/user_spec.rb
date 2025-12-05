@@ -49,8 +49,88 @@ RSpec.describe User, type: :model do
     it { should allow_value("User123").for(:username) }
     it { should allow_value("user_name").for(:username) }
     it { should allow_value("user-name").for(:username) }
-    it { should_not allow_value("user name").for(:username) }
-    it { should_not allow_value("user@name").for(:username) }
+
+    describe "username format validation" do
+      it "rejects usernames with spaces" do
+        user = build(:user, username: "user name")
+        expect(user).not_to be_valid
+        expect(user.errors[:username]).to be_present
+      end
+
+      it "rejects usernames with special characters" do
+        invalid_usernames = [
+          "user!name",
+          "user@name",
+          "user#name",
+          "user$name",
+          "user%name",
+          "user^name",
+          "user&name",
+          "user*name",
+          "user(name",
+          "user)name",
+          "user+name",
+          "user=name",
+          "user[name",
+          "user]name",
+          "user{name",
+          "user}name",
+          "user|name",
+          "user\\name",
+          "user:name",
+          "user;name",
+          "user\"name",
+          "user'name",
+          "user<name",
+          "user>name",
+          "user,name",
+          "user.name",
+          "user/name",
+          "user?name",
+          "user~name",
+          "user`name"
+        ]
+
+        invalid_usernames.each do |username|
+          user = build(:user, username: username)
+          expect(user).not_to be_valid, "Expected '#{username}' to be invalid"
+          expect(user.errors[:username]).to be_present, "Expected '#{username}' to have username error"
+        end
+      end
+
+      it "rejects usernames with emojis" do
+        invalid_usernames = [
+          "user😀name",
+          "user🎉name",
+          "user❤️name",
+          "user👍name",
+          "😀username",
+          "username😀"
+        ]
+
+        invalid_usernames.each do |username|
+          user = build(:user, username: username)
+          expect(user).not_to be_valid, "Expected '#{username}' to be invalid"
+          expect(user.errors[:username]).to be_present, "Expected '#{username}' to have username error"
+        end
+      end
+
+      it "rejects usernames with unicode characters" do
+        invalid_usernames = [
+          "userñame",
+          "useréname",
+          "user中文name",
+          "user日本語name",
+          "userрусскийname"
+        ]
+
+        invalid_usernames.each do |username|
+          user = build(:user, username: username)
+          expect(user).not_to be_valid, "Expected '#{username}' to be invalid"
+          expect(user.errors[:username]).to be_present, "Expected '#{username}' to have username error"
+        end
+      end
+    end
 
     it "validates email uniqueness case insensitively" do
       create(:user, email: "test@example.com")
