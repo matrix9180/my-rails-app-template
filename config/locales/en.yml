@@ -244,6 +244,7 @@ en:
       ip_address: "IP Address"
       created_at: "Created at"
       back: "Back"
+      no_events: "No events found"
 
   settings:
     title: "Settings"

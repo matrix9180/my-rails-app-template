@@ -1,5 +1,5 @@
 class Authentications::EventsController < ApplicationController
   def index
-    @events = Current.user.events.order(created_at: :desc)
+    @events = Current.user.events.order(created_at: :desc).page(params[:page]).per(25)
   end
 end
