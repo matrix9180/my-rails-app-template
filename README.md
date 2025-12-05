@@ -27,6 +27,64 @@ A comprehensive Rails 8.1 starter template with authentication, user profiles, a
 - **Username System** - Unique usernames (letters, numbers, dashes, underscores) with case-insensitive validation
 - **Email Management** - Change email with verification requirement
 
+### Settings Pages
+
+The application includes a comprehensive settings system accessible at `/settings` with the following pages:
+
+#### Profile Settings (`/settings/profile`)
+- **Avatar Management** - Upload and update profile picture with image preview
+- **Bio Editing** - Rich text bio editor using Action Text
+- **Sudo Protection** - Requires re-authentication (sudo mode) to access
+
+#### Password Settings (`/settings/password`)
+- **Password Change** - Update password with confirmation
+- **Security Validation** - Enforces minimum 12 characters
+- **Pwned Check** - Validates against Have I Been Pwned database
+- **Session Invalidation** - Automatically logs out all other sessions after password change
+- **Sudo Protection** - Requires re-authentication (sudo mode) to access
+
+#### Email Settings (`/settings/email`)
+- **Email Change** - Update email address
+- **Verification Required** - Automatically sends verification email after change
+- **Email Unverification** - Email verification status reset when email changes
+- **Sudo Protection** - Requires re-authentication (sudo mode) to access
+
+#### Appearance Settings (`/settings/appearance`)
+- **Theme Selection** - Choose from 35+ DaisyUI themes including:
+  - Light, Dark, Cupcake, Bumblebee, Emerald, Corporate
+  - Synthwave, Retro, Cyberpunk, Valentine, Halloween
+  - Garden, Forest, Aqua, Lofi, Pastel, Fantasy
+  - Wireframe, Black, Luxury, Dracula, CMYK
+  - Autumn, Business, Acid, Lemonade, Night
+  - Coffee, Winter, Dim, Nord, Sunset
+  - Caramel Latte, Abyss, Silk
+- **Live Preview** - Visual theme picker with color swatches
+- **Instant Updates** - Theme changes apply immediately via Stimulus controller with async backend sync
+- **No Sudo Required** - Accessible without re-authentication
+
+#### Two-Factor Authentication (`/settings/two_factor_authentication`)
+- **TOTP Setup** - QR code generation for authenticator apps
+- **Step-by-Step Guide** - Clear instructions for setting up 2FA
+- **Code Verification** - Verify TOTP code before activation
+- **2FA Status** - Visual indicator when 2FA is enabled
+- **Replace Setup** - Regenerate TOTP secret to replace existing setup
+- **Recovery Codes** - View and regenerate recovery codes (10 codes per set)
+  - Accessible at `/settings/two_factor_authentication/recovery_codes`
+  - One-time use codes for account recovery
+  - Regeneration invalidates previous codes
+
+#### Session Management (`/settings/sessions`)
+- **Active Sessions List** - View all active sessions across devices
+- **Session Details** - Shows user agent, IP address, and creation date
+- **Session Revocation** - Log out individual sessions remotely
+- **Current Session** - Identifies which session you're currently using
+
+#### Activity Log (`/settings/events`)
+- **Event History** - Complete log of authentication and security events
+- **Event Types** - Tracks sign in, sign out, password changes, email verification, etc.
+- **Event Details** - Shows action, user agent, IP address, and timestamp
+- **Chronological Order** - Events sorted by most recent first
+
 ### UI & Frontend
 
 - **Tailwind CSS** - Utility-first CSS framework
@@ -152,14 +210,42 @@ bin/rubocop
 ### Routes
 
 Key routes include:
-- `/sign_in`, `/sign_up` - Authentication
+
+#### Authentication Routes
+- `/sign_in`, `/sign_up` - Sign in and registration
+- `/sessions` - View active sessions
+- `/sessions/passwordless` - Passwordless sign-in
+- `/sessions/sudo` - Sudo mode re-authentication
+- `/auth/:provider/callback` - OAuth callbacks
+
+#### Profile Routes
 - `/profile` - User's own profile
 - `/profile/edit` - Edit profile (requires sudo)
-- `/sessions` - View active sessions
+- `/profiles/:username` - Public user profiles
+
+#### Identity Routes
 - `/identity/email/edit` - Change email
+- `/identity/email_verification` - Email verification
 - `/identity/password_reset` - Password reset
-- `/two_factor_authentication/profile/totp` - 2FA setup
-- `/authentications/events` - Activity log
+
+#### Two-Factor Authentication Routes
+- `/two_factor_authentication/profile/totp` - 2FA setup and management
+- `/two_factor_authentication/challenge/totp` - 2FA challenge during sign-in
+- `/two_factor_authentication/challenge/recovery_codes` - Recovery code challenge
+
+#### Settings Routes
+- `/settings` - Settings index (redirects to profile settings)
+- `/settings/profile` - Profile settings (avatar, bio)
+- `/settings/password` - Password change
+- `/settings/email` - Email change
+- `/settings/appearance` - Theme selection
+- `/settings/two_factor_authentication` - 2FA management
+- `/settings/two_factor_authentication/recovery_codes` - Recovery codes
+- `/settings/sessions` - Session management
+- `/settings/events` - Activity log
+
+#### Other Routes
+- `/authentications/events` - Activity log (alternative route)
 
 ## Configuration
 
@@ -210,8 +296,14 @@ The `User` model includes:
 - Password with secure hashing
 - Avatar attachment (Active Storage)
 - Rich text bio (Action Text)
-- 2FA support (TOTP)
+- 2FA support (TOTP) with OTP secret generation
 - Email verification status
+- Theme preference (35+ DaisyUI themes)
+- Role system (user, admin, and extensible for app-specific roles)
+- OAuth provider and UID for third-party authentication
+- Automatic OTP secret generation on user creation
+- Token generation for email verification and password reset
+- Event logging for security-related actions
 
 ## Deployment
 
