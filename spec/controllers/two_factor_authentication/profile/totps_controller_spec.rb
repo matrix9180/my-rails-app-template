@@ -23,7 +23,7 @@ RSpec.describe TwoFactorAuthentication::Profile::TotpsController, type: :request
         post two_factor_authentication_profile_totp_url, params: { code: code }
       }.to change { user.reload.otp_required_for_sign_in }.from(false).to(true)
 
-      expect(response).to redirect_to(two_factor_authentication_profile_recovery_codes_url)
+      expect(response).to redirect_to(settings_two_factor_authentication_recovery_codes_path)
     end
 
     it "should not enable 2FA with invalid TOTP code" do

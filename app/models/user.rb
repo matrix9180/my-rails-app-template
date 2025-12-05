@@ -86,7 +86,7 @@ class User < ApplicationRecord
   has_rich_text :bio
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9_-]+\z/, message: -> { I18n.t("errors.username.invalid_format") } }
+  validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9_-]+\z/, message: ->(object, data) { I18n.t("errors.username.invalid_format") } }
   validates :password, allow_nil: true, length: { minimum: 12 }
   validates :password, not_pwned: { message: -> { I18n.t("errors.password.pwned") } }
 
