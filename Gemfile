@@ -82,5 +82,5 @@ gem "rotp"
 gem "rqrcode"
 
 
-gem "lexxy", "~> 0.1.22.beta"
+gem "lexxy", "~> 0.1.24.beta"
 gem "kaminari"
