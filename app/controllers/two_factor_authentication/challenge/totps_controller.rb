@@ -1,5 +1,5 @@
 class TwoFactorAuthentication::Challenge::TotpsController < ApplicationController
-  skip_before_action :authenticate
+  skip_before_action :require_authentication
 
   before_action :set_user
 

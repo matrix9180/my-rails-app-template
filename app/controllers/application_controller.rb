@@ -4,14 +4,17 @@ class ApplicationController < ActionController::Base
 
   before_action :set_current_request_details
   before_action :authenticate
+  before_action :require_authentication
 
   private
     def authenticate
       if session_record = Session.find_by_id(cookies.signed[:session_token])
         Current.session = session_record
-      else
-        redirect_to sign_in_path
       end
+    end
+
+    def require_authentication
+      redirect_to sign_in_path unless Current.session
     end
 
     def set_current_request_details

@@ -1,5 +1,5 @@
 class Sessions::PasswordlessesController < ApplicationController
-  skip_before_action :authenticate
+  skip_before_action :require_authentication
 
   rate_limit to: 10, within: 1.hour, only: :create, with: -> { redirect_to root_path, alert: t("common.try_again_later") }
   before_action :set_user, only: :edit

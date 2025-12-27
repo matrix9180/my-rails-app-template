@@ -1,6 +1,6 @@
 class Sessions::OmniauthController < ApplicationController
   skip_before_action :verify_authenticity_token
-  skip_before_action :authenticate
+  skip_before_action :require_authentication
 
   def create
     @user = User.create_with(user_params).find_or_initialize_by(omniauth_params)
